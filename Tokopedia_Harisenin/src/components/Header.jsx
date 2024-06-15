@@ -4,7 +4,7 @@ import { IoSearch} from "react-icons/io5";
 import { FaCartShopping, FaBell} from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 
-const header = () => {
+const Header = () => {
   return (
     <div className="fixed top-0 flex flex-col w-full item-center z999 border-solid border-2 borderColor bg-white">
         <div className="w-full h-5vh bgBorderColor fontColorGrey items-center ">
@@ -55,8 +55,7 @@ const header = () => {
             </div>
         </div>
     </div>
-
   )
 }
 
-export default header
+export default Header
