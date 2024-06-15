@@ -6,18 +6,17 @@ import Header from './components/Header';
 
 
 export const App = () => {
-
   return (
     <Router>
       <Routes>
         {/* <Route path="/" element={<Login />} /> */}
-        <Route path="/" element={<Register />} />
+        {/* <Route path="/" element={<Register />} /> */}
         {/* <Route path="/" element={<Login />} />
         <Route path="/" element={<Register />} /> */}
         <Route path="/" element={<Header />} />
       </Routes>
     </Router>
   )
-}
+} 
 
 export default App
