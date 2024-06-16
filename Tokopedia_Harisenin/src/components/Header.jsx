@@ -3,6 +3,7 @@ import { CiMobile1 } from "react-icons/ci";
 import { IoSearch} from "react-icons/io5";
 import { FaCartShopping, FaBell} from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
+import logo from "../assets/img/tokopedia-logo.png";
 
 const Header = () => {
   return (
@@ -26,7 +27,7 @@ const Header = () => {
         </div>
         <nav>
             <div className="flex flex-wrap h-10vh py-0 px-8 justify-between items-center">
-                <img className="w-36 h-10" src="../../src/assets/img/tokopedia-logo.png" alt="" />
+                <img className="w-36 h-10" src={logo} alt="" />
                 <h3 className='py-0 px-5 text-[#929292]'>Kategori</h3>
                 <div className="w-6/12 flex flex-wrap mr-2">
                     <IoSearch className='text-2xl text-gray-500 mr-4' />

@@ -2,8 +2,16 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+:root {
+  --color-primary: black;
+}
+
 .primaryColor{
   color: #2dbb2d;
+}
+
+.bgPrimaryColor{
+  background-color: #2dbb2d;
 }
 
 .borderColor{
