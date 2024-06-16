@@ -21,7 +21,7 @@ export default {
       },
     },
     colors: {
-      pgrimary: 'var(--color-primary)',
+      primary: 'var(--color-primary)',
     }
   },
   plugins: [],
