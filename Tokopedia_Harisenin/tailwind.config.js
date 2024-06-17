@@ -15,6 +15,7 @@ export default {
       width: {
         '8vw':'8vw',
         '20vw': '20vw',
+        '1208px': '1208px',
       },
       padding: {
         '1vh':'1vh',
