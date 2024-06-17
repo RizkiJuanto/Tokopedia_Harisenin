@@ -7,10 +7,10 @@ import logo from "../assets/img/tokopedia-logo.png";
 
 const Header = () => {
   return (
-    <div className="fixed top-0 flex flex-col w-full item-center z999 border-solid border-2 borderColor bg-white">
-        <div className="w-full h-5vh bgBorderColor fontColorGrey items-center ">
+    <div className="fixed top-0 flex flex-col w-full max-h-40 item-center z999 border-solid border-2 borderColor bg-[white]">
+        <div className="w-full h-8 bgBorderColor fontColorGrey items-center ">
             <div className="flex flex-wrap justify-between items-center h-full py-0 px-8">
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap ">
                 
                     {/* <i className="pr-1.5"></i> */}
                     < CiMobile1 className='text-2xl mr-2'/>
@@ -26,22 +26,22 @@ const Header = () => {
             </div>
         </div>
         <nav>
-            <div className="flex flex-wrap h-10vh py-0 px-8 justify-between items-center">
+            <div className="flex flex-wrap h-16 py-0 px-8 justify-between items-center">
                 <img className="w-36 h-10" src={logo} alt="" />
                 <h3 className='py-0 px-5 text-[#929292]'>Kategori</h3>
-                <div className="w-6/12 flex flex-wrap mr-2">
-                    <IoSearch className='text-2xl text-gray-500 mr-4' />
-                    <input className="w-7/12 h-3vh border-2 border-solid rounded borderColor" type="text"/>
+                <div className="w-6/12  h-8 flex flex-wrap mr-2 border-2 borderColor border-solid rounded-xl">
+                    <IoSearch className='text-2xl text-gray-500 mx-2 items-center justify-center mt-1' />
+                    <input className="w-7/12 h-full " type="text"/>
                 </div>
-                <div className="border-r-2 border-solid borderColor flex flex-wrap ">
-                    <FaCartShopping className='text-2xl text-gray-500 mr-4'/>
-                    <FaBell className='text-2xl text-gray-500 mr-4'/>
-                    <IoMdMail className='text-2xl text-gray-500 mr-4'/>
+                <div className="border-r-2 border-solid borderColor justify-between flex flex-wrap w-48 pr-3">
+                    <FaCartShopping className='text-2xl text-gray-500 mr-4 text-[black]'/>
+                    <FaBell className='text-2xl text-gray-500 mr-4 text-[black]'/>
+                    <IoMdMail className='text-2xl text-gray-500 mr-4 text-[black]'/>
                 </div>
                 <p className='text-[#929292]'>profile</p>
             </div>
         </nav>
-        <div className="w-full">
+        <div className="w-full h-12 justify-center items-center content-center">
             <div className="py-0 px-8 flex flex-wrap justify-end items-center gap-80 h-4vh">
                 <ul className='flex flex-wrap justify-center gap-14'>
                     <li className='list-none'><a className='no-underline text-[#929292]' href="">Handphone</a></li>

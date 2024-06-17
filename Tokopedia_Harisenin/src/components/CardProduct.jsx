@@ -6,7 +6,8 @@ import IconBintang from '../assets/img/icon-bintang.png'
 
 const CardProduct = () => {
   return (
-    <div className="itemCard block mb-6 rounded-xl shadow  shadow-[#0000001f] border-solid border-2 border-[#e5e7e9]">
+
+    <div className="itemCard block max-w-max mr-1 mb-6 rounded-xl shadow  shadow-[#0000001f] border-solid border-2 border-[#e5e7e9] ">
         <div className="itemImg">
             <img className='rounded-t-xl w-48 h-48' src={ImgMouse} alt="" />
         </div>

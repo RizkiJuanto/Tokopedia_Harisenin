@@ -10,12 +10,12 @@ import { FaRegCopyright, FaFacebook, FaTwitter, FaPinterest, FaInstagram  } from
 
 const Footer = () => {
   return (
-    <div className='absolute bottom-0 left-0 w-full mt-12 border-t-2 border-solid borderColor bg-[#ffffff]'>
+    <footer className='flex flex-col bottom-0 left-0 w-full mt-12 border-t-2 border-solid bg-[white]'>
       <div className="flex flex-col flex-wrap justify-center items-center max-h-96 mt-5 mr-36 mb-7 ml-36">
         <div className="block p-0 mb-5 min-w-52 text-primary">
-            <p className='pb-1vh text-base font-bold'>Tokopedia</p>
+            <p className='pb-1 text-base font-bold'>Tokopedia</p>
             <ul className='text-sm'>
-                <li className='pb-1'>Tentang TOkopedia</li>
+                <li className='pb-1'>Tentang Tokopedia</li>
                 <li className='pb-1'>Hak Kekayaan Intelektual</li>
                 <li className='pb-1'>Karir</li>
                 <li className='pb-1'>Blog</li>
@@ -69,31 +69,31 @@ const Footer = () => {
                 <li><a href=""><FaInstagram style={{ color: 'pink' }}className='pr-3 text-4xl'/></a></li>
             </ul>
         </div>
-        <div className="w-20vw">
+        <div className="w-80">
             <div className="mb-3">
                 <img className='w-full h-full mb-1' src={gambarFooter} alt="" />
             </div>
-            <div className="flex flex-wrap justify-around">
+            <div className="flex flex-wrap justify-around w-full h-14 item-center content-center">
                 <div className="footerContentOSand">
-                    <img className='h-10 w-24 mb-1' src={gambar22} alt="Download Tokopedia dari Google Play Store"/>
+                    <img className='h-10 w-24' src={gambar22} alt="Download Tokopedia dari Google Play Store"/>
                 </div>
                 <div className="footerContentOSios">
-                    <img className='h-10 w-24 mb-1' src={gambar23} alt="Download Tokopedia dari Apps Store" />
+                    <img className='h-10 w-24' src={gambar23} alt="Download Tokopedia dari Apps Store" />
                 </div>
                 <div className="footerContentOshua">
-                    <img className='h-10 w-24 mb-1' src={huaweiAppLogo} alt="Download Tokopedia dari Huawei Gallery" />
+                    <img className='h-10 w-24' src={huaweiAppLogo} alt="Download Tokopedia dari Huawei Gallery" />
                 </div>
             </div>
-            <div className="p-2">
-                <p className='flex items-center justify-center mb-3 text-primary'><FaRegCopyright className='pr-1 text-primary'/> 2009-2024,HariSenin Group 3B</p>
+            <div className="p-2 items-center content-center">
+                <p className='flex items-center justify-center mb-2 text-primary'><FaRegCopyright className='pr-1 text-primary'/> 2009-2024,HariSenin Group 3B</p>
             </div>
-            <div className="flex justify-around items-center ">
-                <button className='h-4vh w-8vw text-2xl font-bold bg-white text-primary' type='button'>Indonesia</button>
-                <button className='h-4vh w-8vw text-2xl font-bold bgPrimaryColor text-white' type='button'>English</button>
+            <div className="flex justify-around items-center content-center w-full h-14">
+                <button className='h-full w-full text-2xl font-bold bg-white text-primary' type='button'>Indonesia</button>
+                <button className='h-full w-full text-2xl font-bold bgPrimaryColor text-white' type='button'>English</button>
             </div>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
 
