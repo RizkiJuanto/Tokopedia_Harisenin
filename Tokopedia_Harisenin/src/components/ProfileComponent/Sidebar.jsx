@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import ExpandText from './ExpandText';
+import ExpandText2 from './ExpandText2';
 
 const Sidebar = () => {
   return (
@@ -47,22 +49,9 @@ const Sidebar = () => {
             <p>Rp 0</p>
         </div>
         <hr className="border border-gray-300 my-3" />
-        <div className='text-sm px-5'>
-            <h1 className='font-bold mb-3'>Pembelian</h1>
-            <div className="ml-6">
-                <p className='mb-2'>Menunggu Pembayaran</p>
-                <p className='mb-2'>Daftar Transaksi</p>
-            </div>
-        </div>
+            <ExpandText />
         <hr className="border-gray-300 my-3" />
-        <div className='text-sm px-5'>
-            <h1 className='font-bold mb-3'>Profil Saya</h1>
-            <div className="ml-6">
-                <p className='mb-2'>Wishlist</p>
-                <p className='mb-2'>Toko Favorit</p>
-                <p className='mb-2'>Pengaturan</p>
-            </div>
-        </div>
+            <ExpandText2 />
         <hr className="border-gray-300 mt-3 mb-8" />
     </aside>
   )
