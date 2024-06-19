@@ -3,16 +3,22 @@ import Gambar7 from '../assets/img/7.png'
 import GambarAndroid from '../assets/img/100x100/Android.png'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import KategoriCard from '../components/KategoriCard'
+import KategoriBottomCard from '../components/KategoriBottomCard'
+import TrendingItemCard from '../components/TrendingItemCard'
+import CardProduct from '../components/CardProduct'
+import Slider1 from '../assets/img/slide/4.png'
+
 
 const Home = () => {
   return (
-    <div className="home">
+    <div className="home m-0 p-0 h-full min-w-min">
       <Header />
-      <div className="mainHomePage relative block w-full h-max top-60 mt-0 mr-auto mb-3 ml-0">
-        <div className="mainContent block w-1208px my-0 mx-auto">
+      <div className="mainHomePage relative block w-full min-h-screen top-40 mt-0 mr-auto mb-64 ml-0">
+        <div className="mainContent flex w-1208px my-0 mx-auto flex-1">
           <div className="containerSlider py-6 px-0 relative w-full h-auto min-h-60">
             <div className="sliderContent w-1208px h-80">
-              <img className='w-1208px h-80 border-none rounded-xl' src="" alt="" />
+              <img className='w-1208px h-80 border-none rounded-xl' src={Slider1} alt="" />
             </div>
           </div>
         </div>
@@ -28,7 +34,10 @@ const Home = () => {
                 <div className="kategoriContent relative block">
                   <div className="kategoriBorder relative">
                     <div className="kategoriCard flex flex-wrap justify-around">
-                      {/* kategori card */}
+                      <KategoriCard/>
+                      <KategoriCard/>
+                      <KategoriCard/>
+                      <KategoriCard/>
                     </div>
                   </div>
                 </div>
@@ -76,7 +85,7 @@ const Home = () => {
                       </div>
                       <div className="label flex flex-col justify-center p-1.5">
                         <div className="topUpButton w-full h-full flex justify-center items-end py-1 px-0">
-                          <button type='button' className='buttonConfirmation border-none bg-[#03ac0e] text-[white] flex items-center h-10 text-sm font-bold rounded border border-solid border-[black] leading-6 outline-none relative py-0 px-4'>Beli</button>
+                          <button type='button' className='buttonConfirmation bg-[#03ac0e] text-[white] flex items-center h-10 text-sm font-bold rounded border border-solid border-[black] leading-6 outline-none relative py-0 px-4'>Beli</button>
                         </div>
                       </div>
                     </div>
@@ -86,7 +95,13 @@ const Home = () => {
             </div>
             <div className="containerKategoriBottom block mt-3">
               <div className="kategoriBottom flex flex-row flex-nowrap justify-around items-center h-10">
-                {/* kategori bottom content */}
+                <KategoriBottomCard/>
+                <KategoriBottomCard/>
+                <KategoriBottomCard/>
+                <KategoriBottomCard/>
+                <KategoriBottomCard/>
+                <KategoriBottomCard/>
+                <KategoriBottomCard/>
               </div>
             </div>
           </div>
@@ -98,15 +113,38 @@ const Home = () => {
                 </div>
               </div>
               <div className="trendingItemBottom flex my-0 mx-3">
-                <div className="trendingItemContainer flex flex-wrap justify-between items-center my-5 mx-3">
-                  {/* trendi``g item card */}
+                <div className="trendingItemContainer flex flex-wrap justify-between items-center w-full my-5 mx-3">
+                  <TrendingItemCard/>
+                  <TrendingItemCard/>
+                  <TrendingItemCard/>
+                  <TrendingItemCard/>
+                  <TrendingItemCard/>
+                  <TrendingItemCard/>
+                  <TrendingItemCard/>
+                  <TrendingItemCard/>
                 </div>
               </div>
             </div>
           </div>
+          <div className="maincontent block w-1208px my-0 mx-auto">
+            <div className="productItem flex flex-wrap items-center content-center justify-start">
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+              <CardProduct/>
+            </div>
+          </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
 
   )

@@ -11,6 +11,7 @@ export default {
         '4vh': '4h',
         '5vh': '5vh',
         '10vh': '10vh',
+        '1000px': '1000px',
       },
       width: {
         '8vw':'8vw',
@@ -20,6 +21,9 @@ export default {
       padding: {
         '1vh':'1vh',
       },
+      top: {
+        '20%': '20%',
+      }
     },
     colors: {
       primary: 'var(--color-primary)',
