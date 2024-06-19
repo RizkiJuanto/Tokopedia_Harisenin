@@ -7,16 +7,15 @@ import logo from "../assets/img/tokopedia-logo.png";
 
 const Header = () => {
   return (
-    <div className="fixed top-0 flex flex-col w-full item-center z999 border-solid border-2 borderColor bg-white">
-        <div className="w-full h-5vh bgBorderColor fontColorGrey items-center ">
-            <div className="flex flex-wrap justify-between items-center h-full py-0 px-8">
-                <div className="flex flex-wrap">
-                
+    <div className="fixed top-0 flex flex-col w-full items-center z-999 border-solid border-2 borderColor bg-white">
+        <div className="w-full bgBorderColor fontColorGrey">
+            <div className="flex justify-between items-center py-2 px-8">
+                <div className="flex items-center">
                     {/* <i className="pr-1.5"></i> */}
                     < CiMobile1 className='text-2xl mr-2'/>
                     <a className="no-underline text-[#929292]" href="">Download Tokopedia App</a>
                 </div>
-                <ul className="flex flex-wrap justify-end items-end gap-8">
+                <ul className="flex gap-8">
                     <li className='list-none'><a className='no-underline text-[#929292]' href="">Tentang Tokopedia</a></li>
                     <li className='list-none'><a className='no-underline text-[#929292]' href="">Mitra Tokopedia</a></li>
                     <li className='list-none'><a className='no-underline text-[#929292]' href="">Pusat Edukasi Seller</a></li>
@@ -25,13 +24,13 @@ const Header = () => {
                 </ul>
             </div>
         </div>
-        <nav>
-            <div className="flex flex-wrap h-10vh py-0 px-8 justify-between items-center">
+        <nav className="w-full">
+            <div className="flex py-2 px-8 justify-between items-center">
                 <img className="w-36 h-10" src={logo} alt="" />
                 <h3 className='py-0 px-5 text-[#929292]'>Kategori</h3>
                 <div className="w-6/12 flex flex-wrap mr-2">
                     <IoSearch className='text-2xl text-gray-500 mr-4' />
-                    <input className="w-7/12 h-3vh border-2 border-solid rounded borderColor" type="text"/>
+                    <input className="w-7/12 border-2 border-solid rounded borderColor" type="text"/>
                 </div>
                 <div className="border-r-2 border-solid borderColor flex flex-wrap ">
                     <FaCartShopping className='text-2xl text-gray-500 mr-4'/>
@@ -42,8 +41,8 @@ const Header = () => {
             </div>
         </nav>
         <div className="w-full">
-            <div className="py-0 px-8 flex flex-wrap justify-end items-center gap-80 h-4vh">
-                <ul className='flex flex-wrap justify-center gap-14'>
+            <div className="py-0 px-8 flex flex-wrap justify-end items-center gap-80">
+                <ul className='flex gap-14'>
                     <li className='list-none'><a className='no-underline text-[#929292]' href="">Handphone</a></li>
                     <li className='list-none'><a className='no-underline text-[#929292]' href="">Sport</a></li>
                     <li className='list-none'><a className='no-underline text-[#929292]' href="">Skincare</a></li>
