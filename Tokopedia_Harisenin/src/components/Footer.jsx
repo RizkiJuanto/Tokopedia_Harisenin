@@ -89,7 +89,7 @@ const Footer = () => {
             </div>
             <div className="flex justify-around items-center content-center w-full h-14">
                 <button className='h-full w-full text-2xl font-bold bg-white text-primary' type='button'>Indonesia</button>
-                <button className='h-full w-full text-2xl font-bold bgPrimaryColor text-white' type='button'>English</button>
+                <button className='h-full w-full text-2xl font-bold bgPrimaryColor text-[white]' type='button'>English</button>
             </div>
         </div>
       </div>

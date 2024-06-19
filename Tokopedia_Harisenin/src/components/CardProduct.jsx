@@ -23,14 +23,14 @@ const CardProduct = () => {
                     <div className="sellerTier mr-3">
                         <img className='w-5 h-5 justify-center items-center' src={SellerTier} alt="" />
                     </div>
-                    <div className="sellerCity items-center justify-center mr-auto">
+                    <div className="sellerCity items-center justify-center mr-auto pb-1">
                         <p>Jakarta Barat</p>
                     </div>
                 </div>
                 <div className="itemSellInfo flex w-full">
-                    <div className="itemRating flex mr-1 border-solid border-2 border-[#929292]">
-                        <div className="itemStarImg mr-3">
-                            <img src={IconBintang} alt="" />
+                    <div className="itemRating flex mr-1 border-none border-2 border-[#929292]">
+                        <div className="itemStarImg mr-3 items-center content-center">
+                            <img className='w-4 h-4' src={IconBintang} alt="" />
                         </div>
                         <div className="rating mr-3">
                             <p>4.9</p>

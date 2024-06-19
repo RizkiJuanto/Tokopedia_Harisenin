@@ -85,7 +85,7 @@ const Home = () => {
                       </div>
                       <div className="label flex flex-col justify-center p-1.5">
                         <div className="topUpButton w-full h-full flex justify-center items-end py-1 px-0">
-                          <button type='button' className='buttonConfirmation border-none bg-[#03ac0e] text-[white] flex items-center h-10 text-sm font-bold rounded border border-solid border-[black] leading-6 outline-none relative py-0 px-4'>Beli</button>
+                          <button type='button' className='buttonConfirmation bg-[#03ac0e] text-[white] flex items-center h-10 text-sm font-bold rounded border border-solid border-[black] leading-6 outline-none relative py-0 px-4'>Beli</button>
                         </div>
                       </div>
                     </div>
