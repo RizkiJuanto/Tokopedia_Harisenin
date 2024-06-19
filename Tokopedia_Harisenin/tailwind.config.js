@@ -25,9 +25,6 @@ export default {
         '20%': '20%',
       }
     },
-    colors: {
-      primary: 'var(--color-primary)',
-    }
   },
   plugins: [],
 }
