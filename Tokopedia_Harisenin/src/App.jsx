@@ -10,6 +10,7 @@ import Register from './pages/auth/Register'
 // import KategoriBottomCard from './components/HomeComponent/KategoriBottomCard';
 // import KategoriCard from './components/HomeComponent/KategoriCard';
 import Sidebar from './components/ProfileComponent/Sidebar';
+import DashboardMenu from './components/ProfileComponent/DashboardMenu';
 
 
 export const App = () => {
@@ -22,7 +23,8 @@ export const App = () => {
         {/* <Route path="/" element={<Footer />} /> */}
         {/* <Route path="/" element={<CardProduct />} /> */}
         {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/" element={<Sidebar />} />
+        {/* <Route path="/" element={<Sidebar />} /> */}
+        <Route path="/" element={<DashboardMenu />} />
         {/* <Route path="/" element={<TrendingItemCard />} /> */}
         {/* <Route path="/" element={<KategoriBottomCard />} /> */}
         {/* <Route path="/" element={<KategoriCard />} /> */}
