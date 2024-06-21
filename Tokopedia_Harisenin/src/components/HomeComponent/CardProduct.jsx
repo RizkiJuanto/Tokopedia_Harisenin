@@ -3,7 +3,6 @@ import ImgMouse from '../../../public/assets/img/Mouse.jpg'
 import SellerTier from '../../../public/assets/img/14.png'
 import IconBintang from '../../../public/assets/img/icon-bintang.png'
 
-
 const CardProduct = () => {
   return (
 
