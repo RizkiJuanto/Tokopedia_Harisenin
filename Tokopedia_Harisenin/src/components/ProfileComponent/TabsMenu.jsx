@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { IoPersonOutline } from "react-icons/io5";
-import BiodataDiri from '../DashboardContent/BiodataDiri';
+import BiodataDiri from '../TabsContent/BiodataDiri';
 import Register from '../../pages/auth/Register';
 
-const DashboardMenu = () => {
+const TabsMenu = () => {
 
   const [activeTab, setActiveTab] = useState(1);
 
@@ -25,7 +25,7 @@ const DashboardMenu = () => {
         <IoPersonOutline className='w-5 h-5'/>
         <div className="text-base font-medium text-gray-800 ml-2">Bapakku</div>
       </div>
-      <div className="max-w-5xl px-4">
+      <div className="px-4">
         <div className="border border-gray-200">
           <nav className="flex space-x-4">
             {tabs.map((tab) => (
@@ -51,7 +51,7 @@ const DashboardMenu = () => {
                 activeTab === tab.id ? 'block' : 'hidden'
               } bg-white border border-gray-200 p-4 rounded-md`}
             >
-              <p>{tab.content}</p>
+              <div>{tab.content}</div>
             </div>
           ))}
         </div>
@@ -60,4 +60,4 @@ const DashboardMenu = () => {
   )
 }
 
-export default DashboardMenu
+export default TabsMenu
