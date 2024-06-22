@@ -2,23 +2,36 @@ import React from 'react'
 
 const BiodataDiri = () => {
   return (
-    <div className="h-[100vh] flex justify-center items-center bg-white">
-        <div className='bg-white rounded-md p-8 shadow-lg'>
-        <div className='flex justify-between mb-10 mt-6'>
-            <h1 className='font-bold text-4xl'>Masuk</h1>
-            <p className='primaryColor pt-3'>Daftar</p>
+    <div className='flex'>
+      <div className="flex-row">
+        <div className="border">
+          <div className="p-5">
+                <img
+                className="h-2/6 w-5/6 object-cover"
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                alt="Profile"
+                />
+          </div>
+          <div className="border">
+            <p>pilih foto</p>
+          </div>
+          <p>Besar file: maksimum 10.000.000 bytes (10 <br /> Megabytes). Ekstensi file yang <br /> diperbolehkan: .JPG .JPEG .PNG</p>
         </div>
-        <form action="">
-            <div className='flex flex-col'> 
-                <input className='w-96 p-3 border-2 border-gray-300 rounded-md' type="email" placeholder="Nomor HP atau Email" />
-                <label className="text-gray-500 mt-2 text-sm" htmlFor="">Contoh: 08123456789</label>
-            </div>
-            <p className='primaryColor mt-6 '>Butuh bantuan?</p>
-            <button className='w-96 p-3 bg-gray-200 rounded-md mt-4 text-gray-400 font-semibold'>
-            Lanjut
-            </button>
-        </form>
+        <div className="font-semibold">
+          <div className="border p-3 m-2">
+            <p>Ubah Kata Sandi</p>
+          </div>
+          <div className="border p-3 m-2">
+            <p>PIN Tokopedia</p>
+          </div>
+          <div className="border p-3 m-2">
+            <p>Verifikasi Instan</p>
+          </div>
         </div>
+      </div>
+      <div className="flex-row">
+        <p>Ubah biodata diri</p>
+      </div>
     </div>
   )
 }
