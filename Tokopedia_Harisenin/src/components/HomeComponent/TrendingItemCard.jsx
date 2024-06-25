@@ -1,5 +1,5 @@
 import React from 'react'
-import GambarAndroid from '../../../public/assets/img/100x100/Android.png'
+import GambarAndroid from '../../assets/img/100x100/Android.png'
 
 
 const TrendingItemCard = () => {

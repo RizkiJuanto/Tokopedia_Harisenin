@@ -1,5 +1,5 @@
 import React from 'react'
-import Gambar7 from '../../../public/assets/img/7.png'
+import Gambar7 from '../../assets/img/7.png'
 
 const KategoriCard = () => {
   return (

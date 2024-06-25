@@ -1,13 +1,13 @@
 import React from 'react'
-import Gambar7 from '../../public/assets/img/7.png'
-import GambarAndroid from '../../public/assets/img/100x100/Android.png'
+import Gambar7 from '../assets/img/7.png'
+import GambarAndroid from '../assets/img/100x100/Android.png'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import KategoriCard from '../components/HomeComponent/KategoriCard'
 import KategoriBottomCard from '../components/HomeComponent/KategoriBottomCard'
 import TrendingItemCard from '../components/HomeComponent/TrendingItemCard'
 import CardProduct from '../components/HomeComponent/CardProduct'
-import Slider1 from '../../public/assets/img/slide/4.png'
+import Slider1 from '../assets/img/slide/4.png'
 
 
 const Home = () => {

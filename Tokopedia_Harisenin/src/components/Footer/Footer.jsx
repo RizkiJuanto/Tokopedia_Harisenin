@@ -1,17 +1,17 @@
 import React from 'react'
-import PciLogo from '../../../public/assets/img/pci-dss-complaint.png'
-import IsoLogo from '../../../public/assets/img/iso-bsi.png'
-import gambarFooter from '../../../public/assets/img/gambar-footer.png'
-import gambar22 from '../../../public/assets/img/22.png'
-import gambar23 from '../../../public/assets/img/23.png'
-import huaweiAppLogo from '../../../public/assets/img/Huawei app logo.png'
+import PciLogo from '../../assets/img/pci-dss-complaint.png'
+import IsoLogo from '../../assets/img/iso-bsi.png'
+import gambarFooter from '../../assets/img/gambar-footer.png'
+import gambar22 from '../../assets/img/22.png'
+import gambar23 from '../../assets/img/23.png'
+import huaweiAppLogo from '../../assets/img/Huawei app logo.png'
 import { FaRegCopyright, FaFacebook, FaTwitter, FaPinterest, FaInstagram  } from "react-icons/fa";
 
 
 const Footer = () => {
   return (
-    <footer className='flex flex-col bottom-0 left-0 w-full mt-12 border-t-2 border-solid bg-[white]'>
-      <div className="flex flex-col flex-wrap justify-center items-center max-h-96 mt-5 mr-36 mb-7 ml-36">
+    <footer className='flex flex-col bottom-0 left-0 w-full mt-12 border-t-2 border-solid bg-[white] min-w-max max-w-full'>
+      <div className="flex flex-col flex-wrap justify-center items-center max-h-96 mt-5 mr-36 mb-7 ml-36 max-w-screen-2xl">
         <div className="block p-0 mb-5 min-w-52 text-primary">
             <p className='pb-1 text-base font-bold'>Tokopedia</p>
             <ul className='text-sm'>
