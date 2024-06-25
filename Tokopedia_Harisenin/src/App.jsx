@@ -31,14 +31,14 @@ export const App = () => {
         {/* <Route path="/" element={<Home />} /> */}
         {/* <Route path="/" element={<Sidebar />} /> */}
         {/* <Route path="/" element={<TabsMenu />} /> */}
-        {/* <Route path="/" element={<Profile />} /> */}
+        <Route path="/" element={<Profile />} />
         {/* <Route path="/" element={<TrendingItemCard />} /> */}
         {/* <Route path="/" element={<KategoriBottomCard />} /> */}
         {/* <Route path="/" element={<KategoriCard />} /> */}
         {/* <Route path="/" element={<Cart />} /> */}
         {/* <Route path="/" element={<CartItem />} /> */}
         {/* <Route path="/" element={<CartIsEmpty />} /> */}
-        <Route path="/" element={<ProductDetail/>} />
+        {/* <Route path="/" element={<ProductDetail/>} /> */}
       </Routes>
     </Router>
   )

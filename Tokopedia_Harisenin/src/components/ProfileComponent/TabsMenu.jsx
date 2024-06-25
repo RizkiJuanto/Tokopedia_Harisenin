@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IoPersonOutline } from "react-icons/io5";
 import BiodataDiri from '../TabsContent/BiodataDiri';
-import Register from '../../pages/auth/Register';
+import DaftarAlamat from '../TabsContent/DaftarAlamat';
 
 const TabsMenu = () => {
 
@@ -9,7 +9,7 @@ const TabsMenu = () => {
 
   const tabs = [
     { id: 1, title: 'Biodata Diri', content: <BiodataDiri /> },
-    { id: 2, title: 'Daftar Alamat', content: <Register />  },
+    { id: 2, title: 'Daftar Alamat', content: <DaftarAlamat /> },
     { id: 3, title: 'Pembayaran', content: '3' },
     { id: 4, title: 'Rekening Barang', content: '4' },
     { id: 5, title: 'Notifikasi', content: '3' },
@@ -20,21 +20,21 @@ const TabsMenu = () => {
   };
 
   return (
-    <div className=''>
+    <div className='w-3/6'>
       <div className="flex p-5">
         <IoPersonOutline className='w-5 h-5'/>
         <div className="text-base font-medium text-gray-800 ml-2">Bapakku</div>
       </div>
       <div className="px-4">
         <div className="border border-gray-200 rounded-md">
-          <nav className="flex space-x-7">
+          <nav className="flex space-x-8">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => handleTabClick(tab.id)}
                 className={`${
                   activeTab === tab.id
-                    ? 'border-b-2 border-blue-500 primaryColor'
+                    ? 'border-b-2 border-green-500 primaryColor'
                     : 'text-gray-500'
                 } px-4 py-2 text-base font-semibold focus:outline-none`}
               >

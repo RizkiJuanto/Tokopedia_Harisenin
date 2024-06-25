@@ -29,31 +29,20 @@ const BiodataDiri = () => {
           </div>
         </div>
       </div>
-      <div className="flex-row mt-3">
+      <div className="flex-row mt-3 w-4/6">
         <h2 className="text-base font-semibold text-gray-700 mb-4">Ubah Biodata Diri</h2>
-        <div className="text-sm text-gray-700">
-          <div className="flex mb-6">
-            <p className="font-semibold mr-20">Nama</p>
-            <p>John Doe</p>
-          </div>
-          <div className="flex mb-6">
-            <p className="font-semibold mr-9">Tanggal lahir</p>
-            <p>39 Desember 2040</p>
-          </div>
-          <div className="flex mb-6">
-            <p className="font-semibold mr-8">Jenis Kelamin</p>
-            <p>Laki-laki</p>
+        <div className="flex-row">
+          <div className="text-sm text-gray-600">
+            <p className="mb-6">Nama: John Doe</p>
+            <p className="mb-6">Tanggal lahir: 39 Desember 2040</p>
+            <p className="mb-6">Jenis Kelamin: Laki-laki</p>
           </div>
         </div>
-        <h2 className="text-base font-semibold text-gray-700 mb-4">Ubah Kontak</h2>
-        <div className="text-sm text-gray-700">
-          <div className="flex mb-6">
-            <p className="font-semibold mr-20">Email</p>
-            <p>JohnDoe@gmail.com</p>
-          </div>
-          <div className="flex mb-6">
-            <p className="font-semibold mr-12">Nomor HP</p>
-            <p>9993201432</p>
+        <div>
+          <h2 className="text-base font-semibold text-gray-700 mb-4">Ubah Kontak</h2>
+          <div className="text-sm text-gray-600">
+            <p className="mb-6">Email: JohnDoe@gmail.com</p>
+            <p className="mb-6">Nomor HP: 9993201432</p>
           </div>
         </div>
       </div>
