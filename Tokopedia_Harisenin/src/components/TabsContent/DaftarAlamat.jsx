@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IoIosSearch } from "react-icons/io";
+import TambahAlamatModal from '../Modal/TambahAlamatModal';
 
 const DaftarAlamat = () => {
 
@@ -8,6 +9,8 @@ const DaftarAlamat = () => {
     const handleSelect = (order) => {
       setSelected(order);
     };
+
+    const [openModal, setOpenModal] = useState(false);
 
     // const customStyles = {
     //     borderColor: selected ? '#3182ce' : 'green', // Custom border color for the selected state
@@ -66,9 +69,15 @@ const DaftarAlamat = () => {
                     className="block w-5/6 pl-10 py-2 text-sm border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
             </div>
-            <button className="px-4 py-2 text-xs font-semibold bgPrimaryColor text-white rounded-md ml-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+            <button 
+              onClick={() => setOpenModal(true)}
+              className="px-4 py-2 text-xs font-semibold bgPrimaryColor text-white rounded-md ml-2 hover:bg-green-600 focus:outline-none">
                 + Tambah alamat baru
             </button>
+            <TambahAlamatModal
+              isOpen={openModal}
+              onClose={() => setOpenModal(false)}
+            />
         </div>
         <div className="flex text-sm mt-8">
             <button className='px-3 py-2 border bg-green-100 border-gray-300 mr-2 rounded-lg focus:ring-1 focus:ring-green-500'>
@@ -97,14 +106,15 @@ const DaftarAlamat = () => {
                   <div className="h-4 border-l border-gray-300 mx-2"></div>
                   <p className='primaryColor text-xs font-bold'>Ubah Alamat</p>
                 </div>
-              </div>
-              
-              <button 
+              </div>     
+              {div.id !== selected && (
+              <button
                 className="mr-8 px-8 py-2 text-xs font-semibold bgPrimaryColor text-white rounded-md ml-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                 onClick={() => handleSelect(div.id)}
               >
                 Pilih
               </button>
+            )}
             </div>
           </div>
         ))}
