@@ -26,8 +26,8 @@ const TabsMenu = () => {
         <div className="text-base font-medium text-gray-800 ml-2">Bapakku</div>
       </div>
       <div className="px-4">
-        <div className="border border-gray-200">
-          <nav className="flex space-x-4">
+        <div className="border border-gray-200 rounded-md">
+          <nav className="flex space-x-7">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -36,7 +36,7 @@ const TabsMenu = () => {
                   activeTab === tab.id
                     ? 'border-b-2 border-blue-500 primaryColor'
                     : 'text-gray-500'
-                } px-4 py-2 text-sm font-medium focus:outline-none`}
+                } px-4 py-2 text-base font-semibold focus:outline-none`}
               >
                 {tab.title}
               </button>

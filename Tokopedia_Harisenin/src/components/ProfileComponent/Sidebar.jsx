@@ -46,7 +46,7 @@ const Sidebar = () => {
         </div>
         <div className="flex justify-between text-sm px-4 py-3 ml-7 mr-3">
             <p>Saldo</p>
-            <p>Rp 0</p>
+            <p>Rp 5.000.000</p>
         </div>
         <hr className="border border-gray-300 my-3" />
             <ExpandText />
