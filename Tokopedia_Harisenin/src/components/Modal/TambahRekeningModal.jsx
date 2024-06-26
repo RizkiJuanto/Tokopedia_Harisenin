@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import { IoMdClose } from "react-icons/io";
 
-const TambahAlamatModal = ({ isOpen, onClose }) => {
+const TambahRekeningModal = ({ isOpen, onClose }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -13,7 +13,7 @@ const TambahAlamatModal = ({ isOpen, onClose }) => {
       <div className="flex items-center justify-center">
         <div className="sm:w-full max-w-sm bg-white p-8 rounded-lg shadow-lg">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-semibold">Tambah Alamat</h2>
+            <h2 className="text-2xl font-semibold">Tambah Rekening</h2>
             <button
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700"
@@ -23,21 +23,17 @@ const TambahAlamatModal = ({ isOpen, onClose }) => {
           </div>
           <input
             type="text"
-            placeholder="Label Alamat"
+            placeholder="Nama Bank"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
-            placeholder="Nama"
+            placeholder="Nomor Rekening"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
-            placeholder="Nomor HP"
-            className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
-          />
-          <textarea
-            placeholder="Alamat Lengkap"
+            placeholder="Nama Pemilik"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <button className="w-full px-4 py-2 mt-4 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 font-semibold">
@@ -49,4 +45,4 @@ const TambahAlamatModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default TambahAlamatModal;
+export default TambahRekeningModal;
