@@ -7,7 +7,6 @@ import CartIsEmpty from '../components/CartComponent/CartIsEmpty'
 import CartItem from '../components/CartComponent/CartItem'
 
 
-
 const Cart = () => {
   return (
     <div className=" bgBorderColor min-w-fit">
@@ -17,7 +16,6 @@ const Cart = () => {
                 <div className="font-bold text-2xl my-5 ">Keranjang</div>
                 {/* <CartIsEmpty /> */}
                 <CartItem />
-                
             </div>
             
             <div className="bg-[white] rounded-xl mt-16 w-96">
