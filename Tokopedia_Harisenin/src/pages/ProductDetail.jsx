@@ -22,6 +22,7 @@ const ProductDetail = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(1);
+  const [addNote, setAddNote] = useState(false);
 
   const tabs = [
     { id: 1, title: "Detail", content: <Detail /> },
@@ -54,9 +55,10 @@ const ProductDetail = () => {
     }
   };
 
-  const handleMainImageChange = (image) => {
-    setMainImage(image);
-  }
+  // const handleAddNote = () => {
+  //   setAddNote(!addNote);
+  // }
+
 
   const handleQuantityChange = (e) => {
     const value = e.target.value;
@@ -69,17 +71,17 @@ const ProductDetail = () => {
     <div className="bg-white min-w-fit">
       <Header />
         <div className="mx-auto pt-40 flex gap-10 min-w-max max-w-max">
-          <div className="">
+          <div className="sticky top-40 self-start z-0">
             <div className="max-w-sm">
-              {images.map((image)=> {
+              {images.map((image)=> (
                 <div 
                 key={image.id}
                 className={`${
                   mainImage === image.id ? "block" : "hidden" 
-                } w-96 h-96`}>
+                } w-96 h-96 mb-5`}>
                   <img src={image.src} alt="" />
                 </div>
-              })}
+              ))}
               <div className="flex gap-4">
               {images.map((image) => (
                 <div
@@ -160,7 +162,7 @@ const ProductDetail = () => {
               
             </div>
           </div>
-          <div className="">
+          <div className="sticky top-40 self-start">
             <div className="max-w-xs min-w-fit min-h-fit bg-white border border-solid border-gray-300 p-3 rounded-md ">
               <div className="border-b-2 border-gray-400 my-2">
                 <div className="text-base font-bold my-3">Atur Jumlah dan Catatan</div>
@@ -179,7 +181,30 @@ const ProductDetail = () => {
                 </div>
                 <div className="content-center text-xs">Stok Total : <span>Sisa 2</span></div>
               </div>
-              <div className="content-center my-2 text-green-600"><button className="flex items-center text-sm"><LuPen className="mr-2" />Tambah Catatan</button></div>
+              <div className="content-center my-2 text-green-600">
+                {!addNote && (<button 
+                onClick={() => setAddNote(true)} 
+                className={`${addNote  === false? "block":"hidden"} flex items-center text-sm`}>
+                  <LuPen className="mr-2" />
+                  Tambah Catatan
+                </button>
+                )}
+              </div>
+              {addNote && (
+              <div className=" my-4 justify-between">
+                <div className="block  content-center">
+                  <textarea 
+                    className="border border-green-600 p-2 rounded-md max-w-xs whitespace-nowrap overflow-hidden max-h-10 resize-none focus:outline-none" 
+                    placeholder="Berikan catatan" name="" id="">
+                  </textarea>
+                </div>
+                <button 
+                  onClick={() => setAddNote(false)}
+                  className="text-sm text-green-600">
+                    Batalkan Catatan
+                </button>
+              </div>
+              )}
               <div className="flex my-4 justify-between ">
                 <div className="text-sm content-center">Subtotal</div>
                 <div className="text-base font-bold">Rp6.000.000</div>

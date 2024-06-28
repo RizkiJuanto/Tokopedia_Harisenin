@@ -7,11 +7,10 @@ import logo from "../../assets/img/tokopedia-logo.png";
 
 const Header = () => {
   return (
-    <div className="fixed top-0 flex flex-col w-full max-h-40 item-center z999 border-solid border-2 borderColor bg-[white]">
+    <div className="fixed top-0 flex flex-col w-full max-h-40 item-center z-50 border-solid border-2 borderColor bg-[white]">
       <div className="w-full h-8 bgBorderColor fontColorGrey items-center ">
         <div className="flex flex-wrap justify-between items-center h-full py-0 px-8">
           <div className="flex flex-wrap ">
-            {/* <i className="pr-1.5"></i> */}
             <CiMobile1 className="text-2xl mr-2" />
             <a className="no-underline text-[#929292]" href="">
               Download Tokopedia App
