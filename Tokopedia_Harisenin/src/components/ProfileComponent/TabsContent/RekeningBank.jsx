@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TambahRekeningModal from "../Modal/TambahRekeningModal";
+import TambahRekeningModal from "../../Modal/TambahRekeningModal";
 
 const RekeningBank = () => {
   const [openModal, setOpenModal] = useState(false);

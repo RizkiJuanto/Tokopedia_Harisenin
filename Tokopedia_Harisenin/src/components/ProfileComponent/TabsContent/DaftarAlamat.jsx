@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
-import TambahAlamatModal from "../Modal/TambahAlamatModal";
-import divs from "../AlamatDummy";
+import TambahAlamatModal from "../../Modal/TambahAlamatModal";
+import divs from "../../AlamatDummy";
 
 const DaftarAlamat = () => {
   const [selected, setSelected] = useState(1);
