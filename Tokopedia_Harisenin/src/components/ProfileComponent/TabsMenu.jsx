@@ -12,7 +12,7 @@ const TabsMenu = () => {
     { id: 1, title: "Biodata Diri", content: <BiodataDiri /> },
     { id: 2, title: "Daftar Alamat", content: <DaftarAlamat /> },
     { id: 3, title: "Pembayaran", content: <Pembayaran /> },
-    { id: 4, title: "Rekening Barang", content: <RekeningBank /> },
+    { id: 4, title: "Rekening Bank", content: <RekeningBank /> },
     { id: 5, title: "Notifikasi", content: "3" },
   ];
 

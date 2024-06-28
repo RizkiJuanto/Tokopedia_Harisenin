@@ -3,19 +3,13 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { BsFillTicketFill } from "react-icons/bs";
-<<<<<<< HEAD
-import CartIsEmpty from "../components/CartComponent/CartIsEmpty";
-import CartItem from "../components/CartComponent/CartItem";
-=======
 import CartIsEmpty from '../components/CartComponent/CartIsEmpty'
 import CartItem from '../components/CartComponent/CartItem'
 
->>>>>>> rizki
 
 const Cart = () => {
   return (
     <div className=" bgBorderColor min-w-fit">
-<<<<<<< HEAD
       <Header />
       <div className="mx-auto pt-40 flex justify-center gap-6 min-w-max max-w-max">
         <div className="w-full">
@@ -39,14 +33,6 @@ const Cart = () => {
                 <BsFillTicketFill className="text-[gold] text-xl" />
               </div>
               <div className="">Makin Hemat Pakai Promo</div>
-=======
-        <Header/>
-        <div className="mx-auto pt-40 flex justify-center gap-6 min-w-max max-w-max">
-            <div className="w-full">
-                <div className="font-bold text-2xl my-5 ">Keranjang</div>
-                {/* <CartIsEmpty /> */}
-                <CartItem />
->>>>>>> rizki
             </div>
             <div className="">
               <button>
