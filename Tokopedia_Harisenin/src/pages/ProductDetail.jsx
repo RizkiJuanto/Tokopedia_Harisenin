@@ -18,7 +18,7 @@ const ProductDetail = () => {
         <div className="">
           <div className="mb-4">
             <img className="w-96 h-96" src={GambarMouse} alt="" />
-          </div>
+          </div>a
           <div className="flex gap-4">
             <div className="">
               <img className="w-16 h-16" src={GambarMouse} alt="" />

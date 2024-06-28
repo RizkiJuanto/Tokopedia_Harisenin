@@ -4,7 +4,7 @@ import ExpandText2 from "./ExpandText2";
 
 const Sidebar = () => {
   return (
-    <aside className="w-80 border-2 border-gray-200 rounded-md m-5">
+    <aside className="w-72 border-2 border-gray-200 rounded-md m-5">
       <div className="flex items-center p-3 mt-1">
         <div className="relative">
           <img
@@ -19,11 +19,11 @@ const Sidebar = () => {
       </div>
       <hr className="border border-gray-300 my-3" />
       <div className="border-2 border-gray-300 rounded-md p-4 mx-5 mt-5 mb-3">
-        <div className="font-bold text-sm">
+        <div className="font-bold text-xs">
           <p>Diskon 70% buat langganan</p>
           <p>PLUS</p>
         </div>
-        <p className="text-sm">Special buatmu, penawaran terbatas</p>
+        <p className="text-xs">Special buatmu, penawaran terbatas</p>
       </div>
       <div className="px-4 py-3 ml-7 mr-3">
         <div className="flex justify-between text-sm mb-1">

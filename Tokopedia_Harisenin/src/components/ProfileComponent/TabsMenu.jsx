@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { IoPersonOutline } from "react-icons/io5";
-import BiodataDiri from "../TabsContent/BiodataDiri";
-import DaftarAlamat from "../TabsContent/DaftarAlamat";
-import RekeningBank from "../TabsContent/RekeningBank";
-import Pembayaran from "../TabsContent/Pembayaran";
+import BiodataDiri from "./TabsContent/BiodataDiri";
+import DaftarAlamat from "./TabsContent/DaftarAlamat";
+import RekeningBank from "./TabsContent/RekeningBank";
+import Pembayaran from "./TabsContent/Pembayaran";
 
 const TabsMenu = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -28,7 +28,7 @@ const TabsMenu = () => {
       </div>
       <div className="px-4">
         <div className="border border-gray-200 rounded-md">
-          <nav className="flex space-x-8">
+          <nav className="flex space-x-7">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -37,7 +37,7 @@ const TabsMenu = () => {
                   activeTab === tab.id
                     ? "border-b-2 border-green-500 primaryColor"
                     : "text-gray-500"
-                } px-4 py-2 text-base font-semibold focus:outline-none`}
+                } px-4 py-2 text-sm font-semibold focus:outline-none`}
               >
                 {tab.title}
               </button>
