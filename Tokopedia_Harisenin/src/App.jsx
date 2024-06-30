@@ -4,7 +4,6 @@ import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import CardProduct from './components/HomeComponent/CardProduct';
 import Home from './pages/Home';
 import TrendingItemCard from './components/HomeComponent/TrendingItemCard';
 import KategoriBottomCard from './components/HomeComponent/KategoriBottomCard';
@@ -31,7 +30,7 @@ export const App = () => {
         {/* <Route path="/" element={<Home />} /> */}
         {/* <Route path="/" element={<Sidebar />} /> */}
         {/* <Route path="/" element={<TabsMenu />} /> */}
-        {/* <Route path="/" element={<Profile />} /> */}
+        <Route path="/" element={<Profile />} />
         {/* <Route path="/" element={<TrendingItemCard />} /> */}
         {/* <Route path="/" element={<KategoriBottomCard />} /> */}
         {/* <Route path="/" element={<KategoriCard />} /> */}

@@ -1,20 +1,35 @@
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import TambahAlamatModal from "../../Modal/TambahAlamatModal";
-import divs from "../../AlamatDummy";
+import UbahAlamatModal from "../../Modal/UbahAlamatModal";
+import divsData from "../../AlamatDummy";
 
 const DaftarAlamat = () => {
+  const [divs, setDivs] = useState(divsData);
   const [selected, setSelected] = useState(1);
+  const [openModal, setOpenModal] = useState(false);
+  const [isUbahAlamatModalOpen, setIsUbahAlamatModalOpen] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
   const handleSelect = (order) => {
     setSelected(order);
   };
 
-  const [openModal, setOpenModal] = useState(false);
-
   const sortedDivs = divs.sort((a, b) =>
     a.id === selected ? -1 : b.id === selected ? 1 : 0
   );
+
+  const openUbahAlamatModal = (address) => {
+    setSelectedAddress(address);
+    setIsUbahAlamatModalOpen(true);
+  };
+
+  const tambahAlamat = (newAddress) => {
+    const newId = divs.length + 1;
+    const updatedDivs = [...divs, { id: newId, ...newAddress }];
+    setDivs(updatedDivs); 
+    setOpenModal(false); 
+  };
 
   return (
     <div className="px-3 py-2">
@@ -38,6 +53,7 @@ const DaftarAlamat = () => {
         <TambahAlamatModal
           isOpen={openModal}
           onClose={() => setOpenModal(false)}
+          tambahAlamat={tambahAlamat}
         />
       </div>
       <div className="flex text-sm mt-8">
@@ -49,7 +65,7 @@ const DaftarAlamat = () => {
         </button>
       </div>
       <div className="flex flex-col mt-4">
-        {sortedDivs.map((div, index) => (
+        {sortedDivs.map((div) => (
           <div
             key={div.id}
             className={`border rounded-md mb-4 ${
@@ -67,7 +83,12 @@ const DaftarAlamat = () => {
                 <div className="flex px-4 mb-4">
                   <p className="primaryColor text-xs font-bold">Share</p>
                   <div className="h-4 border-l border-gray-300 mx-2"></div>
-                  <p className="primaryColor text-xs font-bold">Ubah Alamat</p>
+                  <button
+                    onClick={() => openUbahAlamatModal(div)}
+                    className="primaryColor text-xs font-bold"
+                  >
+                    Ubah Alamat
+                  </button>
                 </div>
               </div>
               {div.id !== selected && (
@@ -82,6 +103,13 @@ const DaftarAlamat = () => {
           </div>
         ))}
       </div>
+      {selectedAddress && (
+        <UbahAlamatModal
+          isOpen={isUbahAlamatModalOpen}
+          onClose={() => setIsUbahAlamatModalOpen(false)}
+          address={selectedAddress}
+        />
+      )}
     </div>
   );
 };

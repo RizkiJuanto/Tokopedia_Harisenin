@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { IoMdClose } from "react-icons/io";
 
-const TambahAlamatModal = ({ isOpen, onClose }) => {
+const TambahAlamatModal = ({ isOpen, onClose, tambahAlamat }) => {
+
+  const [label, setLabel] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+
+  // const [newAddress, setNewAddress] = useState({
+  //   title: "",
+  //   name: "",
+  //   phone: "",
+  //   address: "",
+  // });
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setNewAddress((prevAddress) => ({
+  //     ...prevAddress,
+  //     [name]: value,
+  //   }));
+  // };
+
+  const handleTambahAlamat = () => {
+    tambahAlamat({ title: label, name, phone, address });
+    setLabel("");
+    setName("");
+    setPhone("");
+    setAddress("");
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -23,24 +52,39 @@ const TambahAlamatModal = ({ isOpen, onClose }) => {
           </div>
           <input
             type="text"
+            name="title"
+            // value={newAddress.title}
+            // onChange={handleChange}
             placeholder="Label Alamat"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
+            name="name"
+            // value={newAddress.name}
+            // onChange={handleChange}
             placeholder="Nama"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
+            name="phone"
+            // value={newAddress.phone}
+            // onChange={handleChange}
             placeholder="Nomor HP"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <textarea
+            name="address"
+            // value={newAddress.address}
+            // onChange={handleChange}
             placeholder="Alamat Lengkap"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
-          <button className="w-full px-4 py-2 mt-4 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 font-semibold">
+          <button
+            onClick={handleTambahAlamat}
+            className="w-full px-4 py-2 mt-4 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 font-semibold"
+          >
             Simpan
           </button>
         </div>
