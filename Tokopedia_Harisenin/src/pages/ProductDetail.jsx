@@ -71,7 +71,7 @@ const ProductDetail = () => {
         <div className="mx-auto pt-40 flex gap-10 min-w-max max-w-max">
           <div className="">
             <div className="max-w-sm">
-              {images.map((image)=> {
+              {images.map((image)=> ( 
                 <div 
                 key={image.id}
                 className={`${
@@ -79,7 +79,7 @@ const ProductDetail = () => {
                 } w-96 h-96`}>
                   <img src={image.src} alt="" />
                 </div>
-              })}
+              ))}
               <div className="flex gap-4">
               {images.map((image) => (
                 <div

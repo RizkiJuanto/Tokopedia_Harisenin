@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import PilihAlamatModal from "../../Modal/PilihAlamatModal";
-import UbahAlamatModal from "../../Modal/UbahAlamatModal";
+// import UbahAlamatModal from "../../Modal/UbahAlamatModal";
 import divs from "../../AlamatDummy";
 
 const Pembayaran = () => {
   const [isPilihAlamatModalOpen, setIsPilihAlamatModalOpen] = useState(false);
-  const [isUbahAlamatModalOpen, setIsUbahAlamatModalOpen] = useState(false);
+  // const [isUbahAlamatModalOpen, setIsUbahAlamatModalOpen] = useState(false);
 
   return (
     <div>
@@ -18,10 +18,7 @@ const Pembayaran = () => {
         onClose={() => setIsPilihAlamatModalOpen(false)}
         addresses={divs}
       />
-      <div onClick={() => setIsUbahAlamatModalOpen(true)} className="p-2 cursor-pointer">
-        Klik untuk Ubah Alamat
-      </div>
-      <UbahAlamatModal isOpen={isUbahAlamatModalOpen} onClose={() => setIsUbahAlamatModalOpen(false)} />
+
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import { IoMdClose } from "react-icons/io";
 
-const UbahAlamatModal = (isOpen, onClose) => {
+const UbahAlamatModal = ({isOpen, onClose}) => {
   return (
     <Modal
       isOpen={isOpen}
