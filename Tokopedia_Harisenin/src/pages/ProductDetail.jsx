@@ -85,7 +85,7 @@ const ProductDetail = () => {
         <div className="mx-auto pt-40 flex gap-10 min-w-max max-w-max">
           <div className="sticky top-40 self-start z-0">
             <div className="max-w-sm">
-              {images.map((image)=> (
+              {images.map((image)=> ( 
                 <div 
                 key={image.id}
                 className={`${

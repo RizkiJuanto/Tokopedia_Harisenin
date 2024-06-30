@@ -4,7 +4,6 @@ import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import CardProduct from './components/HomeComponent/CardProduct';
 import Home from './pages/Home';
 import TrendingItemCard from './components/HomeComponent/TrendingItemCard';
 import KategoriBottomCard from './components/HomeComponent/KategoriBottomCard';
