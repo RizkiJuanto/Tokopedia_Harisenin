@@ -57,7 +57,7 @@ const Header = () => {
         </div>
       </div>
       <nav>
-        <div className="flex flex-wrap h-16 px-8 justify-between items-center">
+        <div className="flex  h-16 px-8 justify-between  items-center">
           <img className="w-36 h-10" src={logo} alt="" />
           <h3 className="text-gray-600 mr-4 ml-6">Kategori</h3>
           <div className="w-8/12 relative flex">

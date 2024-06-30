@@ -32,3 +32,14 @@
 .z999 {
   z-index: 999;
 }
+
+.slick-arrow {
+  background-color: #929292;
+  border-radius: 100%;
+  
+}
+.slick-arrow:hover {
+  background-color: var(--color-primary);
+  border-radius: 100%;
+  
+}

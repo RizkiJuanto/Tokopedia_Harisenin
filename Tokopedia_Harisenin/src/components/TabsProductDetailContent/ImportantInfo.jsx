@@ -1,23 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
+import SelengkapnyaModal from '../Modal/SelengkapnyaModal'
 
 const ImportantInfo = () => {
+
+  const [openModal,setOpenModal] = useState(false);
+  const [modalTitle,setModalTitle] = useState('');
+  const openModalWtihTitleSection = (title) => {
+    setOpenModal(true);
+    setModalTitle(title);
+  }
+
+  const sections =[
+    {
+      title:"Jam Pengiriman Barang",
+      content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, labore aut nulla voluptate distinctio a corrupti ex placeat cupiditate qui rerum recusandae,necessitatibus."
+    },
+    {
+      title:"Jam Aktif Toko",
+      content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, labore aut nulla voluptate distinctio a corrupti ex placeat cupiditate qui rerum recusandae, soluta."
+    },
+    {
+      title:"Warranty Product",
+      content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, labore aut nulla voluptate distinctio a corrupti ex placeat cupiditate qui rerum recusanda."
+    }
+  ]
   return (
     <div>
-      <div className="my-3">
-        <div className="text-base font-bold">Jam Pengiriman Barang</div>
-        <div className="text-sm ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas aut dolore esse magnam eligendi ipsa explicabo consectetur aliquid velit magni?</div>
-        <button className="text-green-600 font-semibold">Selengkapnya</button>
-      </div>
-      <div className="my-3">
-        <div className="text-base font-bold">Jam Aktif Toko</div>
-        <div className="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni unde earum repellat perferendis facilis officia voluptas atque sed saepe voluptate.</div>
-        <button className="text-green-600 font-semibold">Selengkapnya</button>
-      </div>
-      <div className="my-3">
-        <div className="text-base font-bold">Warranty Produk</div>
-        <div className="text-sm ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora laborum pariatur commodi consequuntur delectus repudiandae reprehenderit, sit nobis dolorem at.</div>
-        <button className="text-green-600 font-semibold">Selengkapnya</button>
-      </div>
+      {sections.map((section)=> (
+        <div key={section.title} className="my-3">
+          <div className="text-base font-bold">{section.title}</div>
+          <div className="text-sm">{section.content}</div>
+          <button 
+          onClick={()=> openModalWtihTitleSection(section.title)}
+          className="text-green-600 font-semibold">Selengkapnya</button>
+          <SelengkapnyaModal 
+          isOpen={openModal}
+          onClose={()=>setOpenModal(false)}
+          sections={sections}/>
+        </div>
+      ))}
     </div>
   )
 }

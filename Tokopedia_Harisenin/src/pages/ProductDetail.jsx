@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import Slider from 'react-slick';
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import GambarMouse from "../assets/img/Mouse.jpg";
@@ -8,7 +9,8 @@ import GambarLaptop from "../assets/img/Laptop.jpg";
 import GambarIpad from "../assets/img/ipad.jpeg";
 import Detail from "../components/TabsProductDetailContent/Detail";
 import ImportantInfo from "../components/TabsProductDetailContent/ImportantInfo";
-import { FaStar } from "react-icons/fa";
+import Selengkapnya from "../components/Modal/SelengkapnyaModal";
+import { FaStar, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa6";
 import { CiClock1 } from "react-icons/ci";
 import { LuPencil } from "react-icons/lu";
@@ -17,6 +19,10 @@ import { CiHeart } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { LuPen } from "react-icons/lu";
 import { GoDotFill } from "react-icons/go";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+
 
 const ProductDetail = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -35,6 +41,8 @@ const ProductDetail = () => {
     {id:3, src: GambarKeyboard},
     {id:4, src: GambarLaptop},
     {id:5, src: GambarIpad},
+    {id:6, src: GambarKeyboard},
+    {id:7, src: GambarMouse},
   ]
 
   const handleTabClick = (tabId) => {
@@ -55,9 +63,13 @@ const ProductDetail = () => {
     }
   };
 
-  // const handleAddNote = () => {
-  //   setAddNote(!addNote);
-  // }
+  const settings= {
+      dots: false,
+      infinite: false,
+      speed:500,
+      slidesToShow: 5,
+      slidesToScroll: 1,
+  };
 
 
   const handleQuantityChange = (e) => {
@@ -82,20 +94,22 @@ const ProductDetail = () => {
                   <img src={image.src} alt="" />
                 </div>
               ))}
-              <div className="flex gap-4">
-              {images.map((image) => (
-                <div
-                  key={image.id}
-                  onClick={() => handleMainImage(image.id)}
-                  className={`${
-                    mainImage === image.id
-                      ? "border-2 border-green-500"
-                      : "border-none"
-                  }`}
-                >
-                  <img className="w-16 h-16" src={image.src} alt="" />
-                </div>
-              ))}
+              <div className="">
+              <Slider {...settings}>
+                {images.map((image) => (
+                  <div
+                    key={image.id}
+                    onClick={() => handleMainImage(image.id)}
+                    className={`${
+                      mainImage === image.id
+                        ? "border-2 border-green-500 "
+                        : "border-none"
+                    }`}
+                  >
+                    <img className="w-full h-auto " src={image.src} alt="" />
+                  </div>
+                ))}
+              </Slider>
               </div>
             </div>
           </div>
