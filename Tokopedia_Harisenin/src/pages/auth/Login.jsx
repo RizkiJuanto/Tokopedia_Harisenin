@@ -1,6 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 
 const Login = () => {
+  const [inputValue,setInputValue] = useState("")
+
+  const handleInput = (e) =>{
+    setInputValue(e.target.value)
+  }
+
+  const isButtonDisabled = inputValue==="";
+
   return (
     <div className="h-[100vh] flex justify-center items-center bg-white">
       <div className="bg-white rounded-md p-8 shadow-lg">
@@ -14,13 +22,19 @@ const Login = () => {
               className="w-96 p-3 border-2 border-gray-300 rounded-md"
               type="email"
               placeholder="Nomor HP atau Email"
+              value={inputValue}
+              onChange={handleInput}
             />
             <label className="text-gray-500 mt-2 text-sm" htmlFor="">
               Contoh: 08123456789
             </label>
           </div>
           <p className="primaryColor mt-6 ">Butuh bantuan?</p>
-          <button className="w-96 p-3 bg-gray-200 rounded-md mt-4 text-gray-400 font-semibold">
+          <button className={`w-96 p-3 bg-gray-200 rounded-md mt-4 text-gray-400 font-semibold ${
+              isButtonDisabled
+                ? "bg-gray-200 text-gray-400"
+                : "bg-green-500 text-white"
+            }`}>
             Lanjut
           </button>
         </form>

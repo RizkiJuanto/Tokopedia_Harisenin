@@ -50,7 +50,7 @@ const ProductDetail = () => {
   };
 
   const handleMainImage = (imageId) => {
-    setMainImage(imageId);
+    setMainImage(imageId);  
   }
 
   const increaseQuantity = () => {
@@ -223,7 +223,7 @@ const ProductDetail = () => {
                 <div className="text-sm content-center">Subtotal</div>
                 <div className="text-base font-bold">Rp6.000.000</div>
               </div>
-              <div className="flex my-3 w-full justify-center items-center bgPrimaryColor h-10 rounded-md text-white text-base font-bold">+ Keranjang</div>
+              <a href="/Cart"  className="flex my-3 w-full justify-center items-center bgPrimaryColor h-10 rounded-md text-white text-base font-bold">+ Keranjang</a>
               <div className="flex my-3 w-full justify-center items-center bg-white h-10 border border-green-600 rounded-md text-green-600 text-base font-bold">Beli</div>
               <div className="my-2 flex justify-around">
                 <button className="w-full mx-2">

@@ -8,8 +8,10 @@ import KategoriBottomCard from "../components/HomeComponent/KategoriBottomCard";
 import TrendingItemCard from "../components/HomeComponent/TrendingItemCard";
 import CardProduct from "../components/HomeComponent/CardProduct";
 import Slider1 from "../assets/img/slide/4.png";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="home m-0 p-0 h-full min-w-min">
       <Header />
@@ -174,18 +176,18 @@ const Home = () => {
           </div>
           <div className="maincontent block w-1208px my-0 mx-auto">
             <div className="productItem flex flex-wrap items-center content-center justify-start">
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
+              <a href="/ProductDetail"><CardProduct /></a>
             </div>
           </div>
         </div>

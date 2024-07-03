@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { IoMdClose } from "react-icons/io";
 
-const PilihAlamatModal = ({ isOpen, onClose, addresses }) => {
+const PilihAlamatModal = ({ isOpen, onClose, addresses, onSelectedAddress }) => {
   const [selected, setSelected] = useState(1);
 
   const handleSelect = (id) => {
     setSelected(id);
+    onSelectedAddress(id);
+    onClose();
   };
 
   const sortedAddresses = addresses.sort((a, b) =>
@@ -67,9 +69,6 @@ const PilihAlamatModal = ({ isOpen, onClose, addresses }) => {
               </div>
             ))}
           </div>
-          <button className="w-full px-4 py-2 mt-4 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 font-semibold">
-            Pilih Alamat Lainnya
-          </button>
         </div>
       </div>
     </Modal>
