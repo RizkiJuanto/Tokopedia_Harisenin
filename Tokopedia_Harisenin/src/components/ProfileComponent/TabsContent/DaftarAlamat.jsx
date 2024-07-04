@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axiosInstance from "../../../axiosInstance";
 import { IoIosSearch } from "react-icons/io";
 import TambahAlamatModal from "../../Modal/TambahAlamatModal";
 import UbahAlamatModal from "../../Modal/UbahAlamatModal";
-import divsData from "../../AlamatDummy";
 
 const DaftarAlamat = () => {
-  const [divs, setDivs] = useState(divsData);
+  const [divs, setDivs] = useState([]);
   const [selected, setSelected] = useState(1);
   const [openModal, setOpenModal] = useState(false);
   const [isUbahAlamatModalOpen, setIsUbahAlamatModalOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
-  const handleSelect = (order) => {
-    setSelected(order);
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      try {
+        const response = await axiosInstance.get("http://localhost:5000/api/addresses");
+        setDivs(response.data);
+      } catch (error) {
+        console.error("Error ga ke fetchhhh", error);
+      }
+    };
+    fetchAddresses();
+  },[]);
+
+  const handleSelect = (id) => {
+    setSelected(id);
   };
 
   const sortedDivs = divs.sort((a, b) =>
@@ -25,11 +37,11 @@ const DaftarAlamat = () => {
   };
 
   const tambahAlamat = (newAddress) => {
-    const newId = divs.length + 1;
-    const updatedDivs = [...divs, { id: newId, ...newAddress }];
-    setDivs(updatedDivs); 
-    setOpenModal(false); 
+    setDivs(prevDivs => [...prevDivs, newAddress]); 
+    setOpenModal(false);
   };
+
+
 
   return (
     <div className="px-3 py-2">
