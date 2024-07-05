@@ -58,7 +58,7 @@ const Header = () => {
       </div>
       <nav>
         <div className="flex  h-16 px-8 justify-between  items-center">
-          <a href="/Home"><img className="w-36 h-10" src={logo} alt="" /></a>
+          <a href="/Home"><img className="min-w-36 h-10" src={logo} alt="" /></a>
           <h3 className="text-gray-600 mr-4 ml-6">Kategori</h3>
           <div className="w-8/12 relative flex">
             <div className="flex items-center">
