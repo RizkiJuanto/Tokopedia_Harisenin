@@ -1,36 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { BsFillTicketFill } from "react-icons/bs";
-import CartIsEmpty from '../components/CartComponent/CartIsEmpty'
-import CartItem from '../components/CartComponent/CartItem'
+
+import PaymentItem from "../components/Payment/PaymentItem";
 
 
-const Cart = () => {
-
-  const [totalPrice, setTotalPrice] = useState(0);
-  const handleTotalChange =(quantity,price) => {
-    setTotalPrice(quantity*price);
-  }
-
-
+const Payment = () => {
   return (
     <div className=" bgBorderColor min-w-fit">
       <Header />
       <div className="mx-auto pt-40 flex justify-center gap-6 min-w-max max-w-max">
         <div className="w-full">
-          <div className="font-bold text-2xl my-5 ">Keranjang</div>
-          {/* <CartIsEmpty /> */}
-          <CartItem onTotalChange={handleTotalChange} />
+          <div className="font-bold text-2xl my-5 ">Pengiriman</div>
+          <PaymentItem />
         </div>
-
         <div className="bg-[white] rounded-xl mt-16 w-96">
           <div className="w-full px-5 my-5 ">
             <div className="font-bold text-xl my-3">Ringkasan Belanja</div>
             <div className="flex justify-between">
               <div className="fontColorGrey">Total</div>
-              <div className="fontColorGrey">Rp.{totalPrice}</div>
+              <div className="fontColorGrey">-</div>
             </div>
             <hr className="mt-2" />
           </div>
@@ -50,7 +41,7 @@ const Cart = () => {
           <hr className="mx-5" />
           <div className="w-full px-5 my-5">
             <button className="bgPrimaryColor rounded-xl text-white w-full">
-              <a href="/Payment" className="block my-2 px-2">Beli</a>
+              <div className=" my-2 px-2">Beli</div>
             </button>
           </div>
         </div>
@@ -61,4 +52,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Payment;

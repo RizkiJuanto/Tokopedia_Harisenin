@@ -1,42 +1,53 @@
-import React, {useEffect, useState} from "react";
-import StoreComponent from "./StoreComponent";
+import React,  { useEffect,useState }  from 'react'
+import { MdEditNote  } from "react-icons/md";
+import { FaRegHeart,FaHeart } from "react-icons/fa";
+import { MdOutlineDelete } from "react-icons/md";
+import GambarMouse from "../../assets/img/Mouse.jpg";
 
-const CartItem = ({onTotalChange}) => {
+const StoreItem = ({onTotalChange}) => {
+    const [quantity, setQuantity] = useState(1);
+    const [isLiked,setIsLiked] = useState(false);
+    const [isDropDownOpen,setDropDownOpen] = useState(false);
+    const [text,setText] = useState("");
+    const maxCharacters = 144;
+    const price = 599000;
 
-  const [quantity, setQuantity] = useState(0)
-  const [price, setPrice] = useState(0)
+    useEffect(()=>{
+        onTotalChange(quantity,price);
+    },[quantity,price,onTotalChange]);
 
-  const handleChange  = (quantity,price) => {
-    setQuantity(quantity);
-    setPrice(price);
-  };
-
-  useEffect(()=>{
-    onTotalChange(quantity,price);
-  },[quantity,price,onTotalChange]);
-
+    const increaseQuantity = () => {
+        setQuantity(quantity+1);
+      };
+    
+      const decreaseQuantity = () => {
+        if(quantity > 1){
+          setQuantity(quantity-1);
+        }
+      };
+    
+      const toggleLike = () =>{
+        setIsLiked(!isLiked);
+      }
+    
+      const toggleDropDown = () =>{
+        setDropDownOpen(!isDropDownOpen);
+      }
+    
+      const handleTextChange = (e) => {
+        if (e.target.value.length <= maxCharacters) {
+          setText(e.target.value);
+        }
+      };
+    
+      const handleQuantityChange = (e) => {
+        const value = e.target.value;
+        if(value === ''|| (Number(value)>0 && Number.isInteger(Number(value)))) {
+          setQuantity(Number(value));
+        }
+      }
   return (
-    <div className="block">
-      <div className="bg-white my-3 py-3 px-5 flex justify-between items-center rounded-xl ">
-        <div className="flex gap-5">
-          <div className="">
-            <input type="checkbox" />
-          </div>
-          <div className="font-bold">
-            Pilih Semua <span>(1)</span>
-          </div>
-        </div>
-        <div className="primaryColor font-semibold">Hapus</div>
-      </div>
-      <StoreComponent onTotalChange={handleChange}/>
-      {/* <div className="bg-white rounded-xl">
-        <div className="flex gap-5 my-3 py-3 px-5">
-          <div className="">
-            <input  type="checkbox" />
-          </div>
-          <div className="font-bold">Nama Toko</div>
-        </div>
-        <div className="flex gap-5 my-3 py-3 px-5">
+    <div className="flex gap-5 my-3 py-3 px-5">
           <div className="flex gap-5">
             <div className="">
               <input type="checkbox" />
@@ -115,9 +126,7 @@ const CartItem = ({onTotalChange}) => {
             </div>
           </div>
         </div>
-      </div> */}
-    </div>
-  );
-};
+  )
+}
 
-export default CartItem;
+export default StoreItem

@@ -20,6 +20,13 @@ let divs = [
     phone: "9751123121",
     address: "Jalan test aja, blok S no 96, Kota blabla, Tangerang, kb 119",
   },
+  {
+    id: 4,
+    title: "Rumah jkt",
+    name: "Abun",
+    phone: "9751123121",
+    address: "Jalan test aja, blok S no 96, Kota blabla, Tangerang, kb 119",
+  },
 ];
 
 export default divs;

@@ -15,27 +15,20 @@ import Cart from './pages/Cart';
 import CartIsEmpty from './components/CartComponent/CartIsEmpty';
 import CartItem from './components/CartComponent/CartItem';
 import ProductDetail from './pages/ProductDetail';
+import Payment from './pages/Payment';
+import PilihAlamatModal from './components/Modal/PilihAlamatModal';
 
 export const App = () => {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/" element={<Login />} /> */}
-        {/* <Route path="/" element={<Register />} /> */}
-        {/* <Route path="/" element={<Header />} /> */}
-        {/* <Route path="/" element={<Footer />} /> */}
-        {/* <Route path="/" element={<CardProduct />} /> */}
-        {/* <Route path="/" element={<Home />} /> */}
-        {/* <Route path="/" element={<Sidebar />} /> */}
-        {/* <Route path="/" element={<TabsMenu />} /> */}
-        <Route path="/" element={<Profile />} />
-        {/* <Route path="/" element={<TrendingItemCard />} /> */}
-        {/* <Route path="/" element={<KategoriBottomCard />} /> */}
-        {/* <Route path="/" element={<KategoriCard />} /> */}
-        {/* <Route path="/" element={<Cart />} /> */}
-        {/* <Route path="/" element={<CartItem />} /> */}
-        {/* <Route path="/" element={<CartIsEmpty />} /> */}
-        {/* <Route path="/" element={<ProductDetail/>} /> */}
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/ProductDetail" element={<ProductDetail />} />
+        <Route path="/Payment" element={<Payment/>} />
       </Routes>
     </Router>
   )
