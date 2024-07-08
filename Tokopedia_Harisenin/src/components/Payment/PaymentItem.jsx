@@ -32,12 +32,12 @@ return (
                     <button
                     onClick={()=> setOpenModal(true)}
                     className="border-2 border-gray-300 rounded-md py-1 px-2 text-sm font-bold text-gray-500 ">Pilih Alamat</button>
-                    <PilihAlamatModal
+                    {openModal ? <PilihAlamatModal
                         isOpen={openModal}
                         onClose={()=> setOpenModal(false)}
-                        addresses={divs}
-                        onSelectedAddress={handleSelectAddress}
-                    />
+                        // addresses={divs}
+                        // onSelectedAddress={handleSelectAddress}
+                    /> : null}
                 </div>
             </div>
         </div>

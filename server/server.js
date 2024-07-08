@@ -4,6 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const db = require("./db");
 const routes = require("./routes/router");
+const rekeningRoute = require("./routes/rekeningRoute");
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.get("/", (req, res) => res.send("index"));
 
 // Alamat routes
 app.use("/api/addresses", routes);
+
+app.use("/api/rekenings", rekeningRoute);
 
 db.sync()
   .then(() => console.log('Database synced'))

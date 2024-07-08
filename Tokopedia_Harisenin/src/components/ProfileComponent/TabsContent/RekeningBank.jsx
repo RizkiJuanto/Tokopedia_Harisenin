@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import TambahRekeningModal from "../../Modal/TambahRekeningModal";
+import axiosInstance from "../../../axiosInstance";
 
 const RekeningBank = () => {
   const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      try {
+        const response = await axiosInstance.get("http://localhost:5000/api/rekenings");
+        setDivs(response.data);
+      } catch (error) {
+        console.error("Error ga ke fetchhhh", error);
+      }
+    };
+    fetchAddresses();
+  },[]);
 
   return (
     <div className="py-3 px-3">

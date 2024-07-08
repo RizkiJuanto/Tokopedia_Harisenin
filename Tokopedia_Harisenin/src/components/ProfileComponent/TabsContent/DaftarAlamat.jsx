@@ -41,8 +41,6 @@ const DaftarAlamat = () => {
     setOpenModal(false);
   };
 
-
-
   return (
     <div className="px-3 py-2">
       <div className="relative flex">

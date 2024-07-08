@@ -44,7 +44,7 @@ router.get("/add", (req, res) => {
     phone,
     address,
   })
-    .then((alamat) => res.redirect("/alamats"))
+    .then((alamat) => res.redirect("/api"))
     .catch((err) => console.log(err));
 });
 
