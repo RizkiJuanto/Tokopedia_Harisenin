@@ -26,6 +26,31 @@ router.post("/", async (req, res) => {
   }
 });
 
+//update alamat
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, name, phone, address } = req.body;
+
+    const alamat = await Alamat.findByPk(id);
+    if (!alamat) {
+      return res.status(404).json({ error: "Alamat not found" });
+    }
+
+    alamat.title = title;
+    alamat.name = name;
+    alamat.phone = phone;
+    alamat.address = address;
+
+    await alamat.save();
+
+    res.status(200).json(alamat);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to update alamat" });
+  }
+});
+
 // Add sebuah alamat
 router.get("/add", (req, res) => {
   const data = {

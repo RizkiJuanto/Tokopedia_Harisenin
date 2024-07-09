@@ -24,6 +24,7 @@ rekeningRoute.post("/", async (req, res) => {
   }
 });
 
+//tes add aja
 rekeningRoute.get("/addRekening", (req, res) => {
     const data = {
       bankName: "rekening saya",

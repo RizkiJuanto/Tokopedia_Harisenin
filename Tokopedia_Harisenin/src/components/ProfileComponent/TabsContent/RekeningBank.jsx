@@ -1,21 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TambahRekeningModal from "../../Modal/TambahRekeningModal";
 import axiosInstance from "../../../axiosInstance";
 
 const RekeningBank = () => {
+  const [divs, setDivs] = useState([]);
+  // const [selected, setSelected] = useState(1);
+  // const [selectedRekening, setSelectedRekening] = useState(null);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    const fetchAddresses = async () => {
+    const fetchRekening = async () => {
       try {
-        const response = await axiosInstance.get("http://localhost:5000/api/rekenings");
+        const response = await axiosInstance.get(
+          "http://localhost:5000/api/rekenings"
+        );
         setDivs(response.data);
       } catch (error) {
         console.error("Error ga ke fetchhhh", error);
       }
     };
-    fetchAddresses();
-  },[]);
+    fetchRekening();
+  }, []);
+
+  // const handleSelect = (id) => {
+  //   setSelected(id);
+  // };
+
+  // const sortedDivs = divs.sort((a, b) =>
+  //   a.id === selected ? -1 : b.id === selected ? 1 : 0
+  // );
+
+  const tambahRekening = (newRekening) => {
+    setDivs((prevDivs) => [...prevDivs, newRekening]);
+    setOpenModal(false);
+  };
 
   return (
     <div className="py-3 px-3">
@@ -37,6 +55,7 @@ const RekeningBank = () => {
         <TambahRekeningModal
           isOpen={openModal}
           onClose={() => setOpenModal(false)}
+          tambahRekening={tambahRekening}
         />
       </div>
     </div>
