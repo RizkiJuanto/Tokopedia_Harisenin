@@ -3,6 +3,15 @@ import Modal from "react-modal";
 import { IoMdClose } from "react-icons/io";
 
 const UbahAlamatModal = ({isOpen, onClose}) => {
+
+  // const [formData, setFormData] = useState({
+  //   title: "",
+  //   name: "",
+  //   phone: "",
+  //   address: "",
+  // });
+
+
   return (
     <Modal
       isOpen={isOpen}

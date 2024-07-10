@@ -6,13 +6,14 @@ const Alamat = require("../models/Alamat");
 //Get alamat list
 router.get("/", async (req, res) => {
   try {
-    const alamats = await Alamat.findAll();
-    res.status(200).json(alamats);
+    const address = await Alamat.findAll();
+    res.status(200).json(address);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to fetch addresses" });
+    console.error("Failed to fetch addresses:", err);
+    res.status(500).json({ error: "Failed to fetch addresses", details: err.message });
   }
 });
+
 
 // POST new alamat
 router.post("/", async (req, res) => {
@@ -26,7 +27,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-//update alamat
+//PUT update alamat
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -51,7 +52,29 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Add sebuah alamat
+// DELETE alamat by ID
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Find the rekening by ID
+    const address = await Alamat.findByPk(id);
+
+    if (!address) {
+      return res.status(404).json({ error: "address not found" });
+    }
+
+    // Delete the rekening
+    await address.destroy();
+
+    res.status(200).json({ message: "address deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting address with ID ${id}:", error);
+    res.status(500).json({ error: "Failed to delete address" });
+  }
+});
+
+// Add alamat
 router.get("/add", (req, res) => {
   const data = {
     title: "alamat saya",
@@ -69,7 +92,7 @@ router.get("/add", (req, res) => {
     phone,
     address,
   })
-    .then((alamat) => res.redirect("/api"))
+    .then((alamat) => res.redirect("/api/addresses"))
     .catch((err) => console.log(err));
 });
 

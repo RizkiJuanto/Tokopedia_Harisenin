@@ -24,6 +24,28 @@ rekeningRoute.post("/", async (req, res) => {
   }
 });
 
+// DELETE rekening by ID
+rekeningRoute.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Find the rekening by ID
+    const rekening = await Rekening.findByPk(id);
+
+    if (!rekening) {
+      return res.status(404).json({ error: "Rekening not found" });
+    }
+
+    // Delete the rekening
+    await rekening.destroy();
+
+    res.status(200).json({ message: "Rekening deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting rekening with ID ${id}:", error);
+    res.status(500).json({ error: "Failed to delete rekening" });
+  }
+});
+
 //tes add aja
 rekeningRoute.get("/addRekening", (req, res) => {
     const data = {
@@ -39,7 +61,7 @@ rekeningRoute.get("/addRekening", (req, res) => {
         number,
         ownerName,
       })
-        .then((rekening) => res.redirect("/api/rekenings"))
+        .then((rekening) => res.redirect("/api/accounts"))
         .catch((err) => console.log(err));
 });
 
