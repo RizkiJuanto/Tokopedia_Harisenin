@@ -53,6 +53,11 @@ const DaftarAlamat = () => {
     setOpenModal(false);
   };
 
+  const handleAddressUpdated = (updatedAddress) => {
+    setAddresses(prevAddress => prevAddress.map(address => address.id === updatedAddress.id ? updatedAddress : address));
+    setIsUbahAlamatModalOpen(false);
+  };
+
   return (
     <div className="px-3 py-2">
       <div className="relative flex">
@@ -137,6 +142,7 @@ const DaftarAlamat = () => {
           isOpen={isUbahAlamatModalOpen}
           onClose={() => setIsUbahAlamatModalOpen(false)}
           address={selectedAddress}
+          onAddressUpdated={handleAddressUpdated}
         />
       )}
     </div>
