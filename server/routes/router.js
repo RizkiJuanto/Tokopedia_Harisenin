@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db");
 const Alamat = require("../models/Alamat");
 
 //Get alamat list
-router.get("/", async (req, res) => {
+router.get("/", async (req,res) => {
   try {
     const alamats = await Alamat.findAll();
     res.status(200).json(alamats);
