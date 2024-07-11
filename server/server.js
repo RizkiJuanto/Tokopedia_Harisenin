@@ -3,9 +3,9 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
 const db = require("./db");
-const routes = require("./routes/router");
-const rekeningRoute = require("./routes/rekeningRoute");
+const addressRoutes = require("./routes/addressRoutes");
 const productRoute = require("./routes/productRoute");
+const bankAccountRoutes = require("./routes/bankAccountRoutes");
 
 const app = express();
 
@@ -22,10 +22,8 @@ db.authenticate()
 app.get("/", (req, res) => res.send("welcome to api"));
 
 // Alamat routes
-app.use("/api/addresses", routes);
-
-app.use("/api/accounts", rekeningRoute);
-
+app.use("/api/addresses", addressRoutes);
+app.use("/api/accounts", bankAccountRoutes);
 app.use("/api/products", productRoute);
 
 db.sync()

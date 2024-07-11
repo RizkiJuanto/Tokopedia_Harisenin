@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Alamat = db.define(
+const Address = db.define(
   "address",
   {
     title: {
@@ -29,4 +29,4 @@ const Alamat = db.define(
   }
 );
 
-module.exports = Alamat;
+module.exports = Address;

@@ -1,39 +1,35 @@
-const express = require("express");
-const router = express.Router();
-const db = require("../db");
-const Alamat = require("../models/Alamat");
+const Address = require("../models/Address");
 
 //Get alamat list
-router.get("/", async (req, res) => {
+exports.getAllAddresses = async (req, res) => {
   try {
-    const address = await Alamat.findAll();
-    res.status(200).json(address);
+    const alamats = await Address.findAll();
+    res.status(200).json(alamats);
   } catch (err) {
-    console.error("Failed to fetch addresses:", err);
-    res.status(500).json({ error: "Failed to fetch addresses", details: err.message });
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch addresses" });
   }
-});
-
+};
 
 // POST new alamat
-router.post("/", async (req, res) => {
+exports.createAddress = async (req, res) => {
   try {
     const { title, name, phone, address } = req.body;
-    const newAlamat = await Alamat.create({ title, name, phone, address });
+    const newAlamat = await Address.create({ title, name, phone, address });
     res.status(201).json(newAlamat);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to create alamat" });
   }
-});
+};
 
 //PUT update alamat
-router.put("/:id", async (req, res) => {
+exports.updateAddress = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, name, phone, address } = req.body;
 
-    const alamat = await Alamat.findByPk(id);
+    const alamat = await Address.findByPk(id);
     if (!alamat) {
       return res.status(404).json({ error: "Alamat not found" });
     }
@@ -50,15 +46,15 @@ router.put("/:id", async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Failed to update alamat" });
   }
-});
+};
 
 // DELETE alamat by ID
-router.delete("/:id", async (req, res) => {
+exports.deleteAddress = async (req, res) => {
   const { id } = req.params;
 
   try {
     // Find the rekening by ID
-    const address = await Alamat.findByPk(id);
+    const address = await Address.findByPk(id);
 
     if (!address) {
       return res.status(404).json({ error: "address not found" });
@@ -72,10 +68,10 @@ router.delete("/:id", async (req, res) => {
     console.error("Error deleting address with ID ${id}:", error);
     res.status(500).json({ error: "Failed to delete address" });
   }
-});
+};
 
 // Add alamat
-router.get("/add", (req, res) => {
+exports.addAddress = (req, res) => {
   const data = {
     title: "alamat saya",
     name: "saya",
@@ -86,7 +82,7 @@ router.get("/add", (req, res) => {
   let { title, name, phone, address } = data;
 
   // masukin ke table
-  Alamat.create({
+  Address.create({
     title,
     name,
     phone,
@@ -94,6 +90,4 @@ router.get("/add", (req, res) => {
   })
     .then((alamat) => res.redirect("/api/addresses"))
     .catch((err) => console.log(err));
-});
-
-module.exports = router;
+};
