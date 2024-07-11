@@ -1,7 +1,12 @@
 const Sequelize = require("sequelize");
-const db = new Sequelize("Tokopedia_Harisenin", "postgres", "postgres", {
-  host: "localhost",
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
   dialect: "postgres",
+  port: +process.env.DB_PORT,
 
   pool: {
     max: 5,

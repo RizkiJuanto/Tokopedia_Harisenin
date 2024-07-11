@@ -13,7 +13,7 @@ const TambahAlamatModal = ({ isOpen, onClose, tambahAlamat }) => {
   const handleTambahAlamat = async () => {
     try {
       const newAddress = { title, name, phone, address };
-      const response = await axiosInstance.post("http://localhost:5000/api/addresses", newAddress);
+      const response = await axiosInstance.post("http://localhost:8000/api/addresses", newAddress);
       console.log(response)
       tambahAlamat(response.data);
       setTitle("");

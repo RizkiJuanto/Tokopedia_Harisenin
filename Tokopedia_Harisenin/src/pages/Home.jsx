@@ -174,20 +174,9 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="maincontent block w-1208px my-0 mx-auto">
-            <div className="productItem flex flex-wrap items-center content-center justify-start">
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
-              <a href="/ProductDetail"><CardProduct /></a>
+          <div className="block w-1208px my-0 mx-auto">
+            <div className="flex items-center content-center justify-start">
+              <CardProduct />
             </div>
           </div>
         </div>
