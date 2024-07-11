@@ -34,34 +34,38 @@ const ProductDetail = () => {
   const [addNote, setAddNote] = useState(false);
 
   const { id } = useParams();
-  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState(null);
 
   useEffect(() =>{
     const fetchProduct = async () => {
       try{
-        const response = await axiosInstance.get("http://localhost:8000/api/products/${id}");
-        setProducts(response.data);
+        const response = await axiosInstance.get(`http://localhost:8000/api/products/${id}`);
+        setProduct(response.data);
       }catch(e){
         console.error("Error ga ke fetchhhh", e);
       }
     };
-    fetchProduct();
+    if(id)fetchProduct();
+
   },[id]);
 
   const tabs = [
     { id: 1, title: "Detail", content: <Detail /> },
     { id: 2, title: "Info Penting", content:<ImportantInfo/> },
   ];
+  const constructImageUrl = (path) => {
+    return `http://localhost:8000${path}`;
+  };
 
-  const images = [
-    {id:1, src: GambarMouse},
-    {id:2, src: GambarMonitor},
-    {id:3, src: GambarKeyboard},
-    {id:4, src: GambarLaptop},
-    {id:5, src: GambarIpad},
-    {id:6, src: GambarKeyboard},
-    {id:7, src: GambarMouse},
-  ]
+  // const images = [
+  //   {id:1, src: GambarMouse},
+  //   {id:2, src: GambarMonitor},
+  //   {id:3, src: GambarKeyboard},
+  //   {id:4, src: GambarLaptop},
+  //   {id:5, src: GambarIpad},
+  //   {id:6, src: GambarKeyboard},
+  //   {id:7, src: GambarMouse},
+  // ]
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -100,103 +104,98 @@ const ProductDetail = () => {
   return (
     <div className="bg-white min-w-fit">
       <Header />
-        <div className="mx-auto pt-40 flex gap-10 min-w-max max-w-max">
-          {products.map((product) => (
-          <div className="sticky top-40 self-start z-0">
-            <div className="max-w-sm">
-              {images.map((image)=> ( 
-                <div 
-                key={product.product_id}
-                className={`${
-                  mainImage === product.product_id? "block" : "hidden" 
-                } w-96 h-96 mb-5`}>
-                  <img src={product.product_image} alt="" />
+          
+          <div key={product?.product_id} className="mx-auto pt-40 flex gap-10 min-w-max max-w-max">
+            <div className="sticky top-40 self-start z-0">
+              <div className="max-w-sm">
+                
+                  <div className="block w-96 h-96 mb-5">
+                    <img src={constructImageUrl(product?.product_details[0].product_image)} alt="" />
+                  </div>
+                <div className="">
+                  {/* cari main image pakai find */}
+                <Slider {...settings}>
+                  {product?.product_details.map((detail)=> (
+                    <div
+                      key={detail.product_detail_id}
+                      onClick={() => handleMainImage(detail.product_detail_id)}
+                      className={`${
+                        mainImage === detail.product_detail_id
+                          ? "border-2 border-green-500 "
+                          : "border-none"
+                      }`}
+                    >
+                      <img className="w-full h-auto " src={detail.product_image} alt="" />
+                    </div>
+                  ))}
+                </Slider>
+                </div>
+              </div>
+            </div>
+
+            <div className="max-w-md ">
+              <div className="block my-3">
+                <div className="font-bold text-2xl">{product?.product_name}</div>
+                <div className="flex gap-5 items-center my-2 text-gray-500">
+                  <div className="">Terjual <span>5</span></div>
+                  <GoDotFill/>
+                  <div className="flex gap-2 items-center"><FaStar className="text-yellow-300"/> 4.9 <span>(<span>9 </span>rating)</span></div>
+                  <GoDotFill />
+                  <div className="">Diskusi (<span>4</span>)</div>
+                </div>
+              </div>
+              <div className="block my-2 py-3 text-3xl font-bold border-b-2 border-solid border-gray-100">Rp<span>6.000.000</span></div>
+              <div className="my-2 py-3 border-b-2 border-solid border-gray-100">
+                <nav className="flex space-x-8"> 
+                  {tabs.map((tab)=> (
+                    <button 
+                      key={tab.id}
+                      onClick={()=> handleTabClick(tab.id)}
+                      className={`${
+                        activeTab === tab.id 
+                        ? "border-b-2 border-green-500 primaryColor"
+                        : "text-gray-500"
+                      } px-4 py-2 text-base font-semibold focus:outline-none `}>
+                        {tab.title}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+              <div className="">
+              {tabs.map((tab) => (
+                <div
+                  key={tab.id}
+                  className={`${
+                    activeTab === tab.id ? "block" : "hidden"
+                  } bg-white border border-gray-200 p-4 rounded-md`}
+                >
+                  <div>{tab.content}</div>
                 </div>
               ))}
+              </div>
+              <div className="my-2 py-3 border-b-2 border-solid border-gray-100"></div>
               <div className="">
-              <Slider {...settings}>
-                {images.map((image) => (
-                  <div
-                    key={image.id}
-                    onClick={() => handleMainImage(image.id)}
-                    className={`${
-                      mainImage === image.id
-                        ? "border-2 border-green-500 "
-                        : "border-none"
-                    }`}
-                  >
-                    <img className="w-full h-auto " src={image.src} alt="" />
+                <div className="flex justify-between">
+                  <div className="flex justify-around w-full">
+                    <div className="">{product?.store.store_image}</div>
+                    <div className="">
+                      <div className="">{product?.store.store_name}</div>
+                      <div className="flex items-center gap-1">
+                        <FaRegStar />
+                        4.9 (6,8rb)
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <CiClock1 /> diproses dalam 5 jam
+                      </div>
+                    </div>
                   </div>
-                ))}
-              </Slider>
-              </div>
-            </div>
-          </div>
-
-          ))}
-          <div className="max-w-md ">
-            <div className="block my-3">
-              <div className="font-bold text-2xl">Samsung Galaxy S22 8/256 GB Resmi SEIN Fullset Second Bekas Ori</div>
-              <div className="flex gap-5 items-center my-2 text-gray-500">
-                <div className="">Terjual <span>5</span></div>
-                <GoDotFill/>
-                <div className="flex gap-2 items-center"><FaStar className="text-yellow-300"/> 4.9 <span>(<span>9 </span>rating)</span></div>
-                <GoDotFill />
-                <div className="">Diskusi (<span>4</span>)</div>
-              </div>
-            </div>
-            <div className="block my-2 py-3 text-3xl font-bold border-b-2 border-solid border-gray-100">Rp<span>6.000.000</span></div>
-            <div className="my-2 py-3 border-b-2 border-solid border-gray-100">
-              <nav className="flex space-x-8"> 
-                {tabs.map((tab)=> (
-                  <button 
-                    key={tab.id}
-                    onClick={()=> handleTabClick(tab.id)}
-                    className={`${
-                      activeTab === tab.id 
-                      ? "border-b-2 border-green-500 primaryColor"
-                      : "text-gray-500"
-                    } px-4 py-2 text-base font-semibold focus:outline-none `}>
-                      {tab.title}
-                  </button>
-                ))}
-              </nav>
-            </div>
-            <div className="">
-            {tabs.map((tab) => (
-            <div
-              key={tab.id}
-              className={`${
-                activeTab === tab.id ? "block" : "hidden"
-              } bg-white border border-gray-200 p-4 rounded-md`}
-            >
-              <div>{tab.content}</div>
-            </div>
-            ))}
-            </div>
-            <div className="my-2 py-3 border-b-2 border-solid border-gray-100"></div>
-            <div className="">
-              <div className="flex justify-between">
-                <div className="flex justify-around w-full">
-                  <div className="">logo tk</div>
                   <div className="">
-                    <div className="">Nama tk</div>
-                    <div className="flex items-center gap-1">
-                      <FaRegStar />
-                      4.9 (6,8rb)
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <CiClock1 /> diproses dalam 5 jam
-                    </div>
+                    <button className="px-10 justify-center items-center bg-white h-10 border border-green-600 rounded-xl text-green-600 text-base font-bold">Follow</button>
                   </div>
                 </div>
-                <div className="">
-                  <button className="px-10 justify-center items-center bg-white h-10 border border-green-600 rounded-xl text-green-600 text-base font-bold">Follow</button>
-                </div>
               </div>
-              
             </div>
-          </div>
+
           <div className="sticky top-40 self-start">
             <div className="max-w-xs min-w-fit min-h-fit bg-white border border-solid border-gray-300 p-3 rounded-md ">
               <div className="border-b-2 border-gray-400 my-2">
@@ -267,7 +266,7 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
-        </div>
+          </div>
       <Footer />
     </div>
   );
