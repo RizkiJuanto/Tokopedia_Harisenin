@@ -1,17 +1,32 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Modal from "react-modal";
 import { IoMdClose } from "react-icons/io";
+import axiosInstance from "../../axiosInstance";
 
-const PilihAlamatModal = ({ isOpen, onClose, addresses, onSelectedAddress }) => {
+const PilihAlamatModal = ({ isOpen, onClose }) => {
   const [selected, setSelected] = useState(1);
+  const [divs,setDivs] = useState([]);
+  
+  useEffect(() => {
+    console.log("hahaha")
+    const fetchAddresses = async () => {
+      try {
+        const response = await axiosInstance.get("http://localhost:8000/api/addresses");
+        setDivs(response.data);
+      } catch (error) {
+        console.error("Error ga ke fetchhhh", error);
+      }
+    };
+    fetchAddresses();
+  },[]);
 
   const handleSelect = (id) => {
     setSelected(id);
-    onSelectedAddress(id);
+    // onSelectedAddress(id);
     onClose();
   };
 
-  const sortedAddresses = addresses.sort((a, b) =>
+  const sortedAddresses = divs.sort((a, b) =>
     a.id === selected ? -1 : b.id === selected ? 1 : 0
   );
 
@@ -41,26 +56,26 @@ const PilihAlamatModal = ({ isOpen, onClose, addresses, onSelectedAddress }) => 
             </button>
           </div>
           <div className="flex flex-col">
-            {sortedAddresses.map((address) => (
+            {sortedAddresses.map((div) => (
               <div
-                key={address.id}
+                key={div.id}
                 className={`border rounded-md mb-4 ${
-                  address.id === selected ? "bg-green-100 border-green-500" : ""
+                  div.id === selected ? "bg-green-100 border-green-500" : ""
                 }`}
               >
                 <div className="flex justify-between items-center">
                   <div>
                     <div className="p-4 text-xs">
-                      <p className="font-bold">{address.title}</p>
-                      <p className="text-sm font-bold">{address.name}</p>
-                      <p>{address.phone}</p>
-                      <p>{address.address}</p>
+                      <p className="font-bold">{div.title}</p>
+                      <p className="text-sm font-bold">{div.name}</p>
+                      <p>{div.phone}</p>
+                      <p>{div.address}</p>
                     </div>
                   </div>
-                  {address.id !== selected && (
+                  {div.id !== selected && (
                     <button
                       className="mr-8 px-8 py-2 text-xs font-semibold bgPrimaryColor text-white rounded-md ml-2 hover:bg-green-600 focus:outline-none"
-                      onClick={() => handleSelect(address.id)}
+                      onClick={() => handleSelect(div.id)}
                     >
                       pilih
                     </button>

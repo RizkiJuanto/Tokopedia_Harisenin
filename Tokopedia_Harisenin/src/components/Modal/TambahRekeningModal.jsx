@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { IoMdClose } from "react-icons/io";
+import axiosInstance from "../../axiosInstance";
 
-const TambahRekeningModal = ({ isOpen, onClose }) => {
+const TambahRekeningModal = ({ isOpen, onClose, tambahRekening }) => {
+  const [bankName, setBankName] = useState("");
+  const [number, setNumber] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+
+  const handleTambahRekening = async () => {
+    try {
+      const newRekening = { bankName, number, ownerName };
+      const response = await axiosInstance.post(
+        "http://localhost:8000/api/accounts",
+        newRekening
+      );
+      console.log(response);
+      tambahRekening(response.data);
+      setBankName("");
+      setNumber("");
+      setOwnerName("");
+      onClose();
+    } catch (error) {
+      console.error("Error adding rekening", error);
+    }
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -23,20 +46,29 @@ const TambahRekeningModal = ({ isOpen, onClose }) => {
           </div>
           <input
             type="text"
+            value={bankName}
+            onChange={(e) => setBankName(e.target.value)}
             placeholder="Nama Bank"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
             placeholder="Nomor Rekening"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
+            value={ownerName}
+            onChange={(e) => setOwnerName(e.target.value)}
             placeholder="Nama Pemilik"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
-          <button className="w-full px-4 py-2 mt-4 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 font-semibold">
+          <button
+            onClick={handleTambahRekening}
+            className="w-full px-4 py-2 mt-4 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 font-semibold"
+          >
             Simpan
           </button>
         </div>
