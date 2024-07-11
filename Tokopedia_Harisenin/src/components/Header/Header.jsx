@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { IoIosSearch } from "react-icons/io";
 import logo from "../../assets/img/tokopedia-logo.png";
 import { CiShoppingCart } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoMailOutline } from "react-icons/io5";
+import axiosInstance from "../../axiosInstance";
 
 const Header = () => {
   const [isProfileHovered, setIsProfileHovered] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleMouseEnter = () => {
     setIsProfileHovered(true);
@@ -58,7 +61,9 @@ const Header = () => {
       </div>
       <nav>
         <div className="flex  h-16 px-8 justify-between  items-center">
-          <a href="/Home"><img className="min-w-36 h-10" src={logo} alt="" /></a>
+          <a href="/Home">
+            <img className="min-w-36 h-10" src={logo} alt="" />
+          </a>
           <h3 className="text-gray-600 mr-4 ml-6">Kategori</h3>
           <div className="w-8/12 relative flex">
             <div className="flex items-center">
@@ -89,9 +94,15 @@ const Header = () => {
             {isProfileHovered && (
               <div className="absolute top-8 right-0 w-48 text-sm bg-white border border-gray-300 rounded-md shadow-lg p-4">
                 <ul className="text-gray-700">
-                  <li className="py-2 hover:bg-gray-100 cursor-pointer">Profile</li>
-                  <li className="py-2 hover:bg-gray-100 cursor-pointer">Settings</li>
-                  <li className="py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
+                  <li className="py-2 hover:bg-gray-100 cursor-pointer">
+                    Profile
+                  </li>
+                  <li className="py-2 hover:bg-gray-100 cursor-pointer">
+                    Settings
+                  </li>
+                  <li className="py-2 hover:bg-gray-100 cursor-pointer">
+                    Logout
+                  </li>
                 </ul>
               </div>
             )}

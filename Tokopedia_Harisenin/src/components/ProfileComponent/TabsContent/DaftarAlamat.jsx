@@ -5,6 +5,7 @@ import TambahAlamatModal from "../../Modal/TambahAlamatModal";
 import UbahAlamatModal from "../../Modal/UbahAlamatModal";
 
 const DaftarAlamat = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [address, setAddresses] = useState([]);
   const [selected, setSelected] = useState(1);
   const [openModal, setOpenModal] = useState(false);
@@ -39,7 +40,11 @@ const DaftarAlamat = () => {
     }
   };
 
-  const sortedDivs = address.sort((a, b) =>
+  const filteredAddresses = address.filter((address) =>
+    address.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  
+  filteredAddresses.sort((a, b) =>
     a.id === selected ? -1 : b.id === selected ? 1 : 0
   );
 
@@ -67,6 +72,8 @@ const DaftarAlamat = () => {
           </div>
           <input
             type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Tulis Nama Alamat / Kota / Kecamatan tujuan pengiriman"
             className="block w-5/6 pl-10 py-2 text-sm border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
@@ -92,7 +99,7 @@ const DaftarAlamat = () => {
         </button>
       </div>
       <div className="flex flex-col mt-4">
-        {sortedDivs.map((address) => (
+        {filteredAddresses.map((address) => (
           <div
             key={address.id}
             className={`border rounded-md mb-4 ${
