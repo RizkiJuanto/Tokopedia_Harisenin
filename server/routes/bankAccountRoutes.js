@@ -1,6 +1,6 @@
 const express = require("express");
 const bankAccountRoutes = express.Router();
-const bankAccountController = require("../controllers/bankAccountController");
+const bankAccountController = require("../controllers/BankAccountController");
 
 bankAccountRoutes.get("/", bankAccountController.getAllBankAccounts);
 bankAccountRoutes.post("/", bankAccountController.createBankAccount);
