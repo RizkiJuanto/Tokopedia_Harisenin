@@ -28,7 +28,7 @@ const TabsMenu = () => {
       </div>
       <div className="px-4">
         <div className="border border-gray-200 rounded-md">
-          <nav className="flex space-x-7">
+          <nav className="flex space-x-10 justify-center">
             {tabs.map((tab) => (
               <button
                 key={tab.id}

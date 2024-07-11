@@ -20,6 +20,22 @@ const Header = () => {
     setIsProfileHovered(false);
   };
 
+  const handleSearchChange = async (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    
+    if (query.length > 0) {
+      try {
+        const response = await axiosInstance.get(`/products/search?query=${query}`);
+        setSearchResults(response.data);
+      } catch (error) {
+        console.error("Failed to fetch search results", error);
+      }
+    } else {
+      setSearchResults([]);
+    }
+  };
+
   return (
     <div className="fixed top-0 flex flex-col w-full max-h-40 item-center z999 border-solid border-2 bg-white">
       <div className="w-full h-8 bg-gray-100 text-gray-500 items-center ">
@@ -72,8 +88,24 @@ const Header = () => {
             <input
               type="text"
               placeholder="Cari di Tokopedia"
+              value={searchQuery}
+              onChange={handleSearchChange}
               className="w-full pl-10 py-2 text-sm border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
+            {searchResults.length > 0 && (
+              <div className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded-md shadow-lg mt-1">
+                <ul>
+                  {searchResults.map((product, index) => (
+                    <li
+                      key={index}
+                      className="py-2 px-4 text-sm hover:bg-gray-100 cursor-pointer"
+                    >
+                      {product.product_name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           <div className="border-r-2 border-solid justify-around flex flex-wrap w-48 mr-3 pr-2">
             <CiShoppingCart className="text-2xl text-gray-900" />
