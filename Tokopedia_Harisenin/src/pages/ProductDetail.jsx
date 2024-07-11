@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import Slider from 'react-slick';
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -19,8 +19,11 @@ import { CiHeart } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { LuPen } from "react-icons/lu";
 import { GoDotFill } from "react-icons/go";
+import axiosInstance from "../axiosInstance";
+import { useParams } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
 
 
 
@@ -29,6 +32,21 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(1);
   const [addNote, setAddNote] = useState(false);
+
+  const { id } = useParams();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() =>{
+    const fetchProduct = async () => {
+      try{
+        const response = await axiosInstance.get("http://localhost:8000/api/products/${id}");
+        setProducts(response.data);
+      }catch(e){
+        console.error("Error ga ke fetchhhh", e);
+      }
+    };
+    fetchProduct();
+  },[id]);
 
   const tabs = [
     { id: 1, title: "Detail", content: <Detail /> },
@@ -83,15 +101,16 @@ const ProductDetail = () => {
     <div className="bg-white min-w-fit">
       <Header />
         <div className="mx-auto pt-40 flex gap-10 min-w-max max-w-max">
+          {products.map((product) => (
           <div className="sticky top-40 self-start z-0">
             <div className="max-w-sm">
               {images.map((image)=> ( 
                 <div 
-                key={image.id}
+                key={product.product_id}
                 className={`${
-                  mainImage === image.id ? "block" : "hidden" 
+                  mainImage === product.product_id? "block" : "hidden" 
                 } w-96 h-96 mb-5`}>
-                  <img src={image.src} alt="" />
+                  <img src={product.product_image} alt="" />
                 </div>
               ))}
               <div className="">
@@ -113,6 +132,8 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
+
+          ))}
           <div className="max-w-md ">
             <div className="block my-3">
               <div className="font-bold text-2xl">Samsung Galaxy S22 8/256 GB Resmi SEIN Fullset Second Bekas Ori</div>
