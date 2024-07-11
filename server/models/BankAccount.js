@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Rekening = db.define("rekening", {
+const BankAccount = db.define("bankaccount", {
   bankName: {
     type: Sequelize.STRING,
   },
@@ -11,6 +11,8 @@ const Rekening = db.define("rekening", {
   ownerName: {
     type: Sequelize.STRING,
   },
+}, {
+  timestamps: false,
 });
 
-module.exports = Rekening;
+module.exports = BankAccount;

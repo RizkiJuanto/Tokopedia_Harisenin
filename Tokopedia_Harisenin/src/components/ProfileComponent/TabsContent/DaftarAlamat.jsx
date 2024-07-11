@@ -5,7 +5,7 @@ import TambahAlamatModal from "../../Modal/TambahAlamatModal";
 import UbahAlamatModal from "../../Modal/UbahAlamatModal";
 
 const DaftarAlamat = () => {
-  const [divs, setDivs] = useState([]);
+  const [address, setAddresses] = useState([]);
   const [selected, setSelected] = useState(1);
   const [openModal, setOpenModal] = useState(false);
   const [isUbahAlamatModalOpen, setIsUbahAlamatModalOpen] = useState(false);
@@ -15,7 +15,7 @@ const DaftarAlamat = () => {
     const fetchAddresses = async () => {
       try {
         const response = await axiosInstance.get("http://localhost:8000/api/addresses");
-        setDivs(response.data);
+        setAddresses(response.data);
       } catch (error) {
         console.error("Error ga ke fetchhhh", error);
       }
@@ -27,7 +27,19 @@ const DaftarAlamat = () => {
     setSelected(id);
   };
 
-  const sortedDivs = divs.sort((a, b) =>
+  const handleDelete = async (id) => {
+    try {
+      await axiosInstance.delete(`/addresses/${id}`);
+      setAddresses((prevAddresses) =>
+        prevAddresses.filter((address) => address.id !== id)
+      );
+      console.log(`address with ID ${id} deleted successfully.`);
+    } catch (error) {
+      console.error(`Error deleting address with ID ${id}:`, error);
+    }
+  };
+
+  const sortedDivs = address.sort((a, b) =>
     a.id === selected ? -1 : b.id === selected ? 1 : 0
   );
 
@@ -37,8 +49,13 @@ const DaftarAlamat = () => {
   };
 
   const tambahAlamat = (newAddress) => {
-    setDivs(prevDivs => [...prevDivs, newAddress]); 
+    setAddresses(prevAddress => [...prevAddress, newAddress]); 
     setOpenModal(false);
+  };
+
+  const handleAddressUpdated = (updatedAddress) => {
+    setAddresses(prevAddress => prevAddress.map(address => address.id === updatedAddress.id ? updatedAddress : address));
+    setIsUbahAlamatModalOpen(false);
   };
 
   return (
@@ -75,36 +92,43 @@ const DaftarAlamat = () => {
         </button>
       </div>
       <div className="flex flex-col mt-4">
-        {sortedDivs.map((div) => (
+        {sortedDivs.map((address) => (
           <div
-            key={div.id}
+            key={address.id}
             className={`border rounded-md mb-4 ${
-              div.id === selected ? "bg-green-100 border-green-500" : ""
+              address.id === selected ? "bg-green-100 border-green-500" : ""
             }`}
           >
             <div className="flex justify-between items-center">
               <div>
                 <div className="p-4 text-xs">
-                  <p className="font-bold">{div.title}</p>
-                  <p className="text-sm font-bold">{div.name}</p>
-                  <p>{div.phone}</p>
-                  <p>{div.address}</p>
+                  <p className="font-bold">{address.title}</p>
+                  <p className="text-sm font-bold">{address.name}</p>
+                  <p>{address.phone}</p>
+                  <p>{address.address}</p>
                 </div>
                 <div className="flex px-4 mb-4">
                   <p className="primaryColor text-xs font-bold">Share</p>
                   <div className="h-4 border-l border-gray-300 mx-2"></div>
                   <button
-                    onClick={() => openUbahAlamatModal(div)}
+                    onClick={() => openUbahAlamatModal(address)}
                     className="primaryColor text-xs font-bold"
                   >
                     Ubah Alamat
                   </button>
+                  <div className="h-4 border-l border-gray-300 mx-2"></div>
+                  <button
+                    onClick={() => handleDelete(address.id)}
+                    className="primaryColor text-xs font-bold"
+                  >
+                    Hapus
+                  </button>
                 </div>
               </div>
-              {div.id !== selected && (
+              {address.id !== selected && (
                 <button
                   className="mr-8 px-8 py-2 text-xs font-semibold bgPrimaryColor text-white rounded-md ml-2 hover:bg-green-600 focus:outline-none"
-                  onClick={() => handleSelect(div.id)}
+                  onClick={() => handleSelect(address.id)}
                 >
                   Pilih
                 </button>
@@ -118,6 +142,7 @@ const DaftarAlamat = () => {
           isOpen={isUbahAlamatModalOpen}
           onClose={() => setIsUbahAlamatModalOpen(false)}
           address={selectedAddress}
+          onAddressUpdated={handleAddressUpdated}
         />
       )}
     </div>

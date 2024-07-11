@@ -12,7 +12,7 @@ const TambahRekeningModal = ({ isOpen, onClose, tambahRekening }) => {
     try {
       const newRekening = { bankName, number, ownerName };
       const response = await axiosInstance.post(
-        "http://localhost:5000/api/rekenings",
+        "http://localhost:8000/api/accounts",
         newRekening
       );
       console.log(response);
@@ -22,7 +22,7 @@ const TambahRekeningModal = ({ isOpen, onClose, tambahRekening }) => {
       setOwnerName("");
       onClose();
     } catch (error) {
-      console.error("Error adding address", error);
+      console.error("Error adding rekening", error);
     }
   };
 

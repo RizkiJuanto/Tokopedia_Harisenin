@@ -11,7 +11,7 @@ const PilihAlamatModal = ({ isOpen, onClose }) => {
     console.log("hahaha")
     const fetchAddresses = async () => {
       try {
-        const response = await axiosInstance.get("http://localhost:5000/api/addresses");
+        const response = await axiosInstance.get("http://localhost:8000/api/addresses");
         setDivs(response.data);
       } catch (error) {
         console.error("Error ga ke fetchhhh", error);

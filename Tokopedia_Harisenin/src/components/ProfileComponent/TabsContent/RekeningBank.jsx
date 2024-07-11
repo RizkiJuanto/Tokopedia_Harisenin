@@ -3,7 +3,7 @@ import TambahRekeningModal from "../../Modal/TambahRekeningModal";
 import axiosInstance from "../../../axiosInstance";
 
 const RekeningBank = () => {
-  const [divs, setDivs] = useState([]);
+  const [accounts, setAccounts] = useState([]);
   // const [selected, setSelected] = useState(1);
   // const [selectedRekening, setSelectedRekening] = useState(null);
   const [openModal, setOpenModal] = useState(false);
@@ -12,15 +12,27 @@ const RekeningBank = () => {
     const fetchRekening = async () => {
       try {
         const response = await axiosInstance.get(
-          "http://localhost:5000/api/rekenings"
+          "http://localhost:8000/api/accounts"
         );
-        setDivs(response.data);
+        setAccounts(response.data);
       } catch (error) {
         console.error("Error ga ke fetchhhh", error);
       }
     };
     fetchRekening();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axiosInstance.delete(`/accounts/${id}`);
+      setAccounts((prevAccounts) =>
+        prevAccounts.filter((account) => account.id !== id)
+      );
+      console.log(`Rekening with ID ${id} deleted successfully.`);
+    } catch (error) {
+      console.error(`Error deleting rekening with ID ${id}:`, error);
+    }
+  };
 
   // const handleSelect = (id) => {
   //   setSelected(id);
@@ -30,8 +42,8 @@ const RekeningBank = () => {
   //   a.id === selected ? -1 : b.id === selected ? 1 : 0
   // );
 
-  const tambahRekening = (newRekening) => {
-    setDivs((prevDivs) => [...prevDivs, newRekening]);
+  const tambahRekening = (newAccount) => {
+    setAccounts((prevAccount) => [...prevAccount, newAccount]);
     setOpenModal(false);
   };
 
@@ -57,6 +69,23 @@ const RekeningBank = () => {
           onClose={() => setOpenModal(false)}
           tambahRekening={tambahRekening}
         />
+      </div>
+      <div className="flex flex-col mt-4">
+        {accounts.map((account) => (
+          <div key={account.id} className="flex justify-between items-center">
+            <div className="p-4 text-xs">
+              <p>{account.bankName}</p>
+              <p className="font-bold">{account.ownerName}</p>
+              <p className="font-bold">{account.number}</p>
+            </div>
+            <button
+              className="mr-8 px-6 py-2 border-2 text-xs font-semibold rounded-md ml-2 focus:outline-none"
+              onClick={() => handleDelete(account.id)}
+            >
+              Hapus
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
