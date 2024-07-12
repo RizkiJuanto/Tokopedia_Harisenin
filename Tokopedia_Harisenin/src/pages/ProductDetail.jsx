@@ -30,7 +30,8 @@ import axios from "axios";
 const ProductDetail = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [quantity, setQuantity] = useState(1);
-  const [mainImage, setMainImage] = useState(1);
+  const [mainImage, setMainImage] = useState(null);
+  const [mainImageUrl, setMainImageUrl] = useState(null);
   const [addNote, setAddNote] = useState(false);
 
   const { id } = useParams();
@@ -41,6 +42,8 @@ const ProductDetail = () => {
       try{
         const response = await axiosInstance.get(`http://localhost:8000/api/products/${id}`);
         setProduct(response.data);
+        setMainImage(response.data.product_details[0].product_detail_id);
+        setMainImageUrl(response.data.product_details[0].product_image);
       }catch(e){
         console.error("Error ga ke fetchhhh", e);
       }
@@ -72,7 +75,11 @@ const ProductDetail = () => {
   };
 
   const handleMainImage = (imageId) => {
-    setMainImage(imageId);  
+    const selectedImage = product?.product_details.find(
+      detail => detail.product_detail_id === imageId
+    );
+    setMainImage(imageId);
+    setMainImageUrl(selectedImage.product_image);
   }
 
   const increaseQuantity = () => {
@@ -100,6 +107,13 @@ const ProductDetail = () => {
       setQuantity(Number(value));
     }
   }
+  const formatRupiah = (number) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0
+    }).format(number);
+  };
 
   return (
     <div className="bg-white min-w-fit">
@@ -108,10 +122,13 @@ const ProductDetail = () => {
           <div key={product?.product_id} className="mx-auto pt-40 flex gap-10 min-w-max max-w-max">
             <div className="sticky top-40 self-start z-0">
               <div className="max-w-sm">
-                
-                  <div className="block w-96 h-96 mb-5">
-                    <img src={constructImageUrl(product?.product_details[0].product_image)} alt="" />
-                  </div>
+                <div className="block w-96 h-96 mb-5">
+                  {mainImageUrl ? (
+                    <img  src={constructImageUrl(mainImageUrl)} alt="Main product" />
+                    ) : (
+                    <div>Loading...</div>
+                    )}
+                </div>
                 <div className="">
                   {/* cari main image pakai find */}
                 <Slider {...settings}>
@@ -119,13 +136,15 @@ const ProductDetail = () => {
                     <div
                       key={detail.product_detail_id}
                       onClick={() => handleMainImage(detail.product_detail_id)}
-                      className={`${
-                        mainImage === detail.product_detail_id
-                          ? "border-2 border-green-500 "
-                          : "border-none"
-                      }`}
+                      
                     >
-                      <img className="w-full h-auto " src={detail.product_image} alt="" />
+                      <div className={`${
+                        mainImage === detail.product_detail_id
+                          ? "border-2 border-green-500 w-16"
+                          : "border-none "
+                      }`}>
+                        <img className="w-16 h-auto " src={constructImageUrl(detail.product_image)} alt={`Product ${detail.product_detail_id}`} />
+                      </div>
                     </div>
                   ))}
                 </Slider>
@@ -137,14 +156,14 @@ const ProductDetail = () => {
               <div className="block my-3">
                 <div className="font-bold text-2xl">{product?.product_name}</div>
                 <div className="flex gap-5 items-center my-2 text-gray-500">
-                  <div className="">Terjual <span>5</span></div>
+                  <div className="">Terjual <span>{product?.product_sold}</span></div>
                   <GoDotFill/>
-                  <div className="flex gap-2 items-center"><FaStar className="text-yellow-300"/> 4.9 <span>(<span>9 </span>rating)</span></div>
+                  <div className="flex gap-2 items-center"><FaStar className="text-yellow-300"/>{product?.product_rating}<span>(<span>9 </span>rating)</span></div>
                   <GoDotFill />
-                  <div className="">Diskusi (<span>4</span>)</div>
+                  <div className="">Diskusi (<span>4</span>)</div>  
                 </div>
               </div>
-              <div className="block my-2 py-3 text-3xl font-bold border-b-2 border-solid border-gray-100">Rp<span>6.000.000</span></div>
+              <div className="block my-2 py-3 text-3xl font-bold border-b-2 border-solid border-gray-100">{formatRupiah(product?.product_price)}</div>
               <div className="my-2 py-3 border-b-2 border-solid border-gray-100">
                 <nav className="flex space-x-8"> 
                   {tabs.map((tab)=> (
@@ -177,7 +196,13 @@ const ProductDetail = () => {
               <div className="">
                 <div className="flex justify-between">
                   <div className="flex justify-around w-full">
-                    <div className="">{product?.store.store_image}</div>
+                  {product?.store.store_image && (
+                    <img 
+                      src={constructImageUrl(product.store.store_image)} 
+                      alt={product.store.store_name}
+                      className="w-16 h-16 rounded-full"
+                    />
+                  )}
                     <div className="">
                       <div className="">{product?.store.store_name}</div>
                       <div className="flex items-center gap-1">

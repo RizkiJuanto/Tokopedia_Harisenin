@@ -24,6 +24,21 @@ const CardProduct = () => {
     return `http://localhost:8000${path}`;
   };
 
+  const formatRupiah = (number) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0
+    }).format(number);
+  };
+
+  const truncateName = (name, maxLength) => {
+    if (name.length > maxLength) {
+      return name.substring(0, maxLength) + "...";
+    }
+    return name;
+  };
+
   return (
     <div className="flex flex-wrap justify-around ">
       {products.map((product) =>(
@@ -33,11 +48,11 @@ const CardProduct = () => {
             <img className="rounded-t-xl w-48 h-48" src={constructImageUrl(product.product_details[0].product_image)} alt="" />
           </div>
           <div className=" mt-1 mr-1 mb-4 ml-3 ">
-            <div className="max-w-44 mb-1 text-xs">
-              <h4>{product.product_name}</h4>
+            <div className="max-w-44 mb-1">
+              <h4 className="text-xs font-medium">{truncateName(product.product_name,40)}</h4>
             </div>
             <div className="font-bold mb-1">
-              <p>Rp. {product.product_price}</p>
+              <p>{formatRupiah(product.product_price)}</p>
             </div>
             <div className="">
               <div className="flex h-full items-center">
