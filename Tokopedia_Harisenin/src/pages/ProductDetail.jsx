@@ -23,7 +23,6 @@ import axiosInstance from "../axiosInstance";
 import { useParams } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import axios from "axios";
 
 
 
@@ -50,6 +49,8 @@ const ProductDetail = () => {
     };
     if(id)fetchProduct();
 
+    window.scrollTo(0, 0);
+
   },[id]);
 
   const tabs = [
@@ -59,16 +60,6 @@ const ProductDetail = () => {
   const constructImageUrl = (path) => {
     return `http://localhost:8000${path}`;
   };
-
-  // const images = [
-  //   {id:1, src: GambarMouse},
-  //   {id:2, src: GambarMonitor},
-  //   {id:3, src: GambarKeyboard},
-  //   {id:4, src: GambarLaptop},
-  //   {id:5, src: GambarIpad},
-  //   {id:6, src: GambarKeyboard},
-  //   {id:7, src: GambarMouse},
-  // ]
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -115,6 +106,23 @@ const ProductDetail = () => {
     }).format(number);
   };
 
+  const truncateName = (name, maxLength) => {
+    if (!name) return "";
+    if (name.length > maxLength) {
+      return name.substring(0, maxLength) + "...";
+    }
+    return name;
+  };
+
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    if (product) {
+      setTotalPrice(product.product_price * quantity);
+    }
+  }, [product, quantity]);
+
+
   return (
     <div className="bg-white min-w-fit">
       <Header />
@@ -130,7 +138,6 @@ const ProductDetail = () => {
                     )}
                 </div>
                 <div className="">
-                  {/* cari main image pakai find */}
                 <Slider {...settings}>
                   {product?.product_details.map((detail)=> (
                     <div
@@ -220,12 +227,11 @@ const ProductDetail = () => {
                 </div>
               </div>
             </div>
-
           <div className="sticky top-40 self-start">
             <div className="max-w-xs min-w-fit min-h-fit bg-white border border-solid border-gray-300 p-3 rounded-md ">
               <div className="border-b-2 border-gray-400 my-2">
                 <div className="text-base font-bold my-3">Atur Jumlah dan Catatan</div>
-                <div className="my-4 text-xs">Samsung S24, Silver 512GB</div>  
+                <div className="my-4 text-xs">{truncateName(product?.product_name,20)}</div>  
               </div>
               <div className="flex gap-3 my-4">
                 <div className="flex w-fit p-1 m-1 border-solid border-2 border-gray-200 rounded-md">
@@ -238,7 +244,7 @@ const ProductDetail = () => {
                   />
                   <button><div onClick={increaseQuantity} className="mx-1 content-center">+</div></button>
                 </div>
-                <div className="content-center text-xs">Stok Total : <span>Sisa 2</span></div>
+                <div className="content-center text-xs">Stok Total : <span>{product?.product_stock}</span></div>
               </div>
               <div className="content-center my-2 text-green-600">
                 {!addNote && (<button 
@@ -266,7 +272,7 @@ const ProductDetail = () => {
               )}
               <div className="flex my-4 justify-between ">
                 <div className="text-sm content-center">Subtotal</div>
-                <div className="text-base font-bold">Rp6.000.000</div>
+                <div className="text-base font-bold">{formatRupiah(totalPrice)}</div>
               </div>
               <a href="/Cart"  className="flex my-3 w-full justify-center items-center bgPrimaryColor h-10 rounded-md text-white text-base font-bold">+ Keranjang</a>
               <div className="flex my-3 w-full justify-center items-center bg-white h-10 border border-green-600 rounded-md text-green-600 text-base font-bold">Beli</div>
