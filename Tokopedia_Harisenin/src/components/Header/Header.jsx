@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { IoIosSearch } from "react-icons/io";
 import logo from "../../assets/img/tokopedia-logo.png";
 import { CiShoppingCart } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoMailOutline } from "react-icons/io5";
+import axiosInstance from "../../axiosInstance";
 
 const Header = () => {
   const [isProfileHovered, setIsProfileHovered] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleMouseEnter = () => {
     setIsProfileHovered(true);
@@ -15,6 +18,22 @@ const Header = () => {
 
   const handleMouseLeave = () => {
     setIsProfileHovered(false);
+  };
+
+  const handleSearchChange = async (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    
+    if (query.length > 0) {
+      try {
+        const response = await axiosInstance.get(`/products/search?query=${query}`);
+        setSearchResults(response.data);
+      } catch (error) {
+        console.error("Failed to fetch search results", error);
+      }
+    } else {
+      setSearchResults([]);
+    }
   };
 
   return (
@@ -58,7 +77,9 @@ const Header = () => {
       </div>
       <nav>
         <div className="flex  h-16 px-8 justify-between  items-center">
-          <a href="/Home"><img className="min-w-36 h-10" src={logo} alt="" /></a>
+          <a href="/Home">
+            <img className="min-w-36 h-10" src={logo} alt="" />
+          </a>
           <h3 className="text-gray-600 mr-4 ml-6">Kategori</h3>
           <div className="w-8/12 relative flex">
             <div className="flex items-center">
@@ -67,8 +88,24 @@ const Header = () => {
             <input
               type="text"
               placeholder="Cari di Tokopedia"
+              value={searchQuery}
+              onChange={handleSearchChange}
               className="w-full pl-10 py-2 text-sm border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
+            {searchResults.length > 0 && (
+              <div className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded-md shadow-lg mt-1">
+                <ul>
+                  {searchResults.map((product, index) => (
+                    <li
+                      key={index}
+                      className="py-2 px-4 text-sm hover:bg-gray-100 cursor-pointer"
+                    >
+                      {product.product_name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           <div className="border-r-2 border-solid justify-around flex flex-wrap w-48 mr-3 pr-2">
             <CiShoppingCart className="text-2xl text-gray-900" />
@@ -89,9 +126,15 @@ const Header = () => {
             {isProfileHovered && (
               <div className="absolute top-8 right-0 w-48 text-sm bg-white border border-gray-300 rounded-md shadow-lg p-4">
                 <ul className="text-gray-700">
-                  <li className="py-2 hover:bg-gray-100 cursor-pointer">Profile</li>
-                  <li className="py-2 hover:bg-gray-100 cursor-pointer">Settings</li>
-                  <li className="py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
+                  <li className="py-2 hover:bg-gray-100 cursor-pointer">
+                    Profile
+                  </li>
+                  <li className="py-2 hover:bg-gray-100 cursor-pointer">
+                    Settings
+                  </li>
+                  <li className="py-2 hover:bg-gray-100 cursor-pointer">
+                    Logout
+                  </li>
                 </ul>
               </div>
             )}
