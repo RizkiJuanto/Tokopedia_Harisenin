@@ -3,47 +3,39 @@ import axiosInstance from "../../../axiosInstance";
 import { IoIosSearch } from "react-icons/io";
 import TambahAlamatModal from "../../Modal/TambahAlamatModal";
 import UbahAlamatModal from "../../Modal/UbahAlamatModal";
+import DeleteAlamatModal from "../../Modal/DeleteAlamatModal";
 
 const DaftarAlamat = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [address, setAddresses] = useState([]);
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [deleteModalStates, setDeleteModalStates] = useState({});
   const [isUbahAlamatModalOpen, setIsUbahAlamatModalOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        const response = await axiosInstance.get("http://localhost:8000/api/addresses");
+        const response = await axiosInstance.get(
+          "http://localhost:8000/api/addresses"
+        );
         setAddresses(response.data);
       } catch (error) {
         console.error("Error ga ke fetchhhh", error);
       }
     };
     fetchAddresses();
-  },[]);
+  }, []);
 
   const handleSelect = (id) => {
     setSelected(id);
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await axiosInstance.delete(`/addresses/${id}`);
-      setAddresses((prevAddresses) =>
-        prevAddresses.filter((address) => address.id !== id)
-      );
-      console.log(`address with ID ${id} deleted successfully.`);
-    } catch (error) {
-      console.error(`Error deleting address with ID ${id}:`, error);
-    }
-  };
-
   const filteredAddresses = address.filter((address) =>
     address.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  
+
   filteredAddresses.sort((a, b) =>
     a.id === selected ? -1 : b.id === selected ? 1 : 0
   );
@@ -54,13 +46,44 @@ const DaftarAlamat = () => {
   };
 
   const tambahAlamat = (newAddress) => {
-    setAddresses(prevAddress => [...prevAddress, newAddress]); 
+    setAddresses((prevAddress) => [...prevAddress, newAddress]);
     setOpenModal(false);
   };
 
   const handleAddressUpdated = (updatedAddress) => {
-    setAddresses(prevAddress => prevAddress.map(address => address.id === updatedAddress.id ? updatedAddress : address));
+    setAddresses((prevAddress) =>
+      prevAddress.map((address) =>
+        address.id === updatedAddress.id ? updatedAddress : address
+      )
+    );
     setIsUbahAlamatModalOpen(false);
+  };
+
+  const openDeleteModal = (address) => {
+    setDeleteModalStates((prevStates) => ({
+      ...prevStates,
+      [address.id]: true,
+    }));
+  };
+
+  const closeDeleteModal = (address) => {
+    setDeleteModalStates((prevStates) => ({
+      ...prevStates,
+      [address.id]: false,
+    }));
+  };
+
+  const deleteAlamat = async (address) => {
+    try {
+      await axiosInstance.delete(`/addresses/${address.id}`);
+      setAddresses((prevAddresses) =>
+        prevAddresses.filter((addr) => addr.id !== address.id)
+      );
+      console.log(`Address with ID ${address.id} deleted successfully.`);
+    } catch (error) {
+      console.error(`Error deleting address with ID ${address.id}:`, error);
+    }
+    closeDeleteModal(address);
   };
 
   return (
@@ -125,11 +148,17 @@ const DaftarAlamat = () => {
                   </button>
                   <div className="h-4 border-l border-gray-300 mx-2"></div>
                   <button
-                    onClick={() => handleDelete(address.id)}
+                    onClick={() => openDeleteModal(address)}
                     className="primaryColor text-xs font-bold"
                   >
                     Hapus
                   </button>
+                  <DeleteAlamatModal
+                    isOpen={deleteModalStates[address.id]}
+                    onClose={() => closeDeleteModal(address)}
+                    deleteAlamat={deleteAlamat}
+                    address={address}
+                  />
                 </div>
               </div>
               {address.id !== selected && (

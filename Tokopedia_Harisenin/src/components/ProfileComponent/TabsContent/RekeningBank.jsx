@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import TambahRekeningModal from "../../Modal/TambahRekeningModal";
+import DeleteRekeningModal from "../../Modal/DeleteRekeningModal";
 import axiosInstance from "../../../axiosInstance";
 
 const RekeningBank = () => {
   const [accounts, setAccounts] = useState([]);
-  // const [selected, setSelected] = useState(1);
-  // const [selectedRekening, setSelectedRekening] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [deleteModalStates, setDeleteModalStates] = useState({});
 
   useEffect(() => {
     const fetchRekening = async () => {
@@ -22,7 +22,7 @@ const RekeningBank = () => {
     fetchRekening();
   }, []);
 
-  const handleDelete = async (id) => {
+  const deleteBankAccount = async (id) => {
     try {
       await axiosInstance.delete(`/accounts/${id}`);
       setAccounts((prevAccounts) =>
@@ -34,17 +34,23 @@ const RekeningBank = () => {
     }
   };
 
-  // const handleSelect = (id) => {
-  //   setSelected(id);
-  // };
-
-  // const sortedDivs = divs.sort((a, b) =>
-  //   a.id === selected ? -1 : b.id === selected ? 1 : 0
-  // );
-
   const tambahRekening = (newAccount) => {
     setAccounts((prevAccount) => [...prevAccount, newAccount]);
     setOpenModal(false);
+  };
+
+  const openDeleteModal = (id) => {
+    setDeleteModalStates((prevStates) => ({
+      ...prevStates,
+      [id]: true,
+    }));
+  };
+
+  const closeDeleteModal = (id) => {
+    setDeleteModalStates((prevStates) => ({
+      ...prevStates,
+      [id]: false,
+    }));
   };
 
   return (
@@ -80,10 +86,15 @@ const RekeningBank = () => {
             </div>
             <button
               className="mr-8 px-6 py-2 border-2 text-xs font-semibold rounded-md ml-2 focus:outline-none"
-              onClick={() => handleDelete(account.id)}
+              onClick={() => openDeleteModal(account.id)}
             >
               Hapus
             </button>
+            <DeleteRekeningModal
+              isOpen={deleteModalStates[account.id]}
+              onClose={() => closeDeleteModal(account.id)}
+              deleteBankAccount={() => deleteBankAccount(account.id)}
+            />
           </div>
         ))}
       </div>
