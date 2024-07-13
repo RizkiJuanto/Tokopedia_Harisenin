@@ -5,21 +5,21 @@ import axiosInstance from "../../axiosInstance";
 
 const TambahAlamatModal = ({ isOpen, onClose, tambahAlamat }) => {
 
-  const [title, setTitle] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [address_label, setAddress_label] = useState("");
+  const [address_name, setAddress_name] = useState("");
+  const [address_phone, setAddress_phone] = useState("");
+  const [address_full, setAddress_full] = useState("");
 
   const handleTambahAlamat = async () => {
     try {
-      const newAddress = { title, name, phone, address };
+      const newAddress = { address_label, address_name, address_phone, address_full };
       const response = await axiosInstance.post("http://localhost:8000/api/addresses", newAddress);
       console.log(response)
       tambahAlamat(response.data);
-      setTitle("");
-      setName("");
-      setPhone("");
-      setAddress("");
+      setAddress_label("");
+      setAddress_name("");
+      setAddress_phone("");
+      setAddress_full("");
       onClose();
     } catch (error) {
       console.error("Error adding address", error);
@@ -46,28 +46,28 @@ const TambahAlamatModal = ({ isOpen, onClose, tambahAlamat }) => {
           </div>
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={address_label}
+            onChange={(e) => setAddress_label(e.target.value)}
             placeholder="Label Alamat"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={address_name}
+            onChange={(e) => setAddress_name(e.target.value)}
             placeholder="Nama"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            value={address_phone}
+            onChange={(e) => setAddress_phone(e.target.value)}
             placeholder="Nomor HP"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <textarea
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            value={address_full}
+            onChange={(e) => setAddress_full(e.target.value)}
             placeholder="Alamat Lengkap"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />

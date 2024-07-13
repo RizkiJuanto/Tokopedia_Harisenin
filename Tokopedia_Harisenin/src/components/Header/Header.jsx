@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { IoIosSearch } from "react-icons/io";
 import logo from "../../assets/img/tokopedia-logo.png";
+import { Link } from "react-router-dom";
 import { CiShoppingCart } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoMailOutline } from "react-icons/io5";
@@ -23,10 +24,12 @@ const Header = () => {
   const handleSearchChange = async (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-    
+
     if (query.length > 0) {
       try {
-        const response = await axiosInstance.get(`/products/search?query=${query}`);
+        const response = await axiosInstance.get(
+          `/products/search?query=${query}`
+        );
         setSearchResults(response.data);
       } catch (error) {
         console.error("Failed to fetch search results", error);
@@ -77,7 +80,7 @@ const Header = () => {
       </div>
       <nav>
         <div className="flex  h-16 px-8 justify-between  items-center">
-          <a href="/Home">
+          <a href="/">
             <img className="min-w-36 h-10" src={logo} alt="" />
           </a>
           <h3 className="text-gray-600 mr-4 ml-6">Kategori</h3>
@@ -126,9 +129,11 @@ const Header = () => {
             {isProfileHovered && (
               <div className="absolute top-8 right-0 w-48 text-sm bg-white border border-gray-300 rounded-md shadow-lg p-4">
                 <ul className="text-gray-700">
-                  <li className="py-2 hover:bg-gray-100 cursor-pointer">
-                    Profile
-                  </li>
+                  <Link to="/profile">
+                    <li className="py-2 hover:bg-gray-100 cursor-pointer">
+                      Profile
+                    </li>
+                  </Link>
                   <li className="py-2 hover:bg-gray-100 cursor-pointer">
                     Settings
                   </li>

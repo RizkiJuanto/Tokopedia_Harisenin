@@ -58,24 +58,24 @@ const PilihAlamatModal = ({ isOpen, onClose }) => {
           <div className="flex flex-col">
             {sortedAddresses.map((div) => (
               <div
-                key={div.id}
+                key={div.address_id}
                 className={`border rounded-md mb-4 ${
-                  div.id === selected ? "bg-green-100 border-green-500" : ""
+                  div.address_id === selected ? "bg-green-100 border-green-500" : ""
                 }`}
               >
                 <div className="flex justify-between items-center">
                   <div>
                     <div className="p-4 text-xs">
-                      <p className="font-bold">{div.title}</p>
-                      <p className="text-sm font-bold">{div.name}</p>
-                      <p>{div.phone}</p>
-                      <p>{div.address}</p>
+                      <p className="font-bold">{div.address_label}</p>
+                      <p className="text-sm font-bold">{div.address_name}</p>
+                      <p>{div.address_phone}</p>
+                      <p>{div.address_full}</p>
                     </div>
                   </div>
-                  {div.id !== selected && (
+                  {div.address_id !== selected && (
                     <button
                       className="mr-8 px-8 py-2 text-xs font-semibold bgPrimaryColor text-white rounded-md ml-2 hover:bg-green-600 focus:outline-none"
-                      onClick={() => handleSelect(div.id)}
+                      onClick={() => handleSelect(div.address_id)}
                     >
                       pilih
                     </button>

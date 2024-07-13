@@ -33,7 +33,7 @@ const DaftarAlamat = () => {
   };
 
   const filteredAddresses = address.filter((address) =>
-    address.title.toLowerCase().includes(searchQuery.toLowerCase())
+    address.address_label.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   filteredAddresses.sort((a, b) =>
@@ -53,7 +53,7 @@ const DaftarAlamat = () => {
   const handleAddressUpdated = (updatedAddress) => {
     setAddresses((prevAddress) =>
       prevAddress.map((address) =>
-        address.id === updatedAddress.id ? updatedAddress : address
+        address.address_id === updatedAddress.address_id ? updatedAddress : address
       )
     );
     setIsUbahAlamatModalOpen(false);
@@ -62,26 +62,26 @@ const DaftarAlamat = () => {
   const openDeleteModal = (address) => {
     setDeleteModalStates((prevStates) => ({
       ...prevStates,
-      [address.id]: true,
+      [address.address_id]: true,
     }));
   };
 
   const closeDeleteModal = (address) => {
     setDeleteModalStates((prevStates) => ({
       ...prevStates,
-      [address.id]: false,
+      [address.address_id]: false,
     }));
   };
 
   const deleteAlamat = async (address) => {
     try {
-      await axiosInstance.delete(`/addresses/${address.id}`);
+      await axiosInstance.delete(`/addresses/${address.address_id}`);
       setAddresses((prevAddresses) =>
-        prevAddresses.filter((addr) => addr.id !== address.id)
+        prevAddresses.filter((addr) => addr.address_id !== address.address_id)
       );
-      console.log(`Address with ID ${address.id} deleted successfully.`);
+      console.log(`Address with ID ${address.address_id} deleted successfully.`);
     } catch (error) {
-      console.error(`Error deleting address with ID ${address.id}:`, error);
+      console.error(`Error deleting address with ID ${address.address_id}:`, error);
     }
     closeDeleteModal(address);
   };
@@ -124,18 +124,18 @@ const DaftarAlamat = () => {
       <div className="flex flex-col mt-4">
         {filteredAddresses.map((address) => (
           <div
-            key={address.id}
+            key={address.address_id}
             className={`border rounded-md mb-4 ${
-              address.id === selected ? "bg-green-100 border-green-500" : ""
+              address.address_id === selected ? "bg-green-100 border-green-500" : ""
             }`}
           >
             <div className="flex justify-between items-center">
               <div>
                 <div className="p-4 text-xs">
-                  <p className="font-bold">{address.title}</p>
-                  <p className="text-sm font-bold">{address.name}</p>
-                  <p>{address.phone}</p>
-                  <p>{address.address}</p>
+                  <p className="font-bold">{address.address_label}</p>
+                  <p className="text-sm font-bold">{address.address_name}</p>
+                  <p>{address.address_phone}</p>
+                  <p>{address.address_full}</p>
                 </div>
                 <div className="flex px-4 mb-4">
                   <p className="primaryColor text-xs font-bold">Share</p>
@@ -154,7 +154,7 @@ const DaftarAlamat = () => {
                     Hapus
                   </button>
                   <DeleteAlamatModal
-                    isOpen={deleteModalStates[address.id]}
+                    isOpen={deleteModalStates[address.address_id]}
                     onClose={() => closeDeleteModal(address)}
                     deleteAlamat={deleteAlamat}
                     address={address}
@@ -164,7 +164,7 @@ const DaftarAlamat = () => {
               {address.id !== selected && (
                 <button
                   className="mr-8 px-8 py-2 text-xs font-semibold bgPrimaryColor text-white rounded-md ml-2 hover:bg-green-600 focus:outline-none"
-                  onClick={() => handleSelect(address.id)}
+                  onClick={() => handleSelect(address.address_id)}
                 >
                   Pilih
                 </button>

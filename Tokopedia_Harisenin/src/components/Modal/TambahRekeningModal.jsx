@@ -4,13 +4,13 @@ import { IoMdClose } from "react-icons/io";
 import axiosInstance from "../../axiosInstance";
 
 const TambahRekeningModal = ({ isOpen, onClose, tambahRekening }) => {
-  const [bankName, setBankName] = useState("");
-  const [number, setNumber] = useState("");
-  const [ownerName, setOwnerName] = useState("");
+  const [bank_name, setBankName] = useState("");
+  const [account_number, setNumber] = useState("");
+  const [account_name, setOwnerName] = useState("");
 
   const handleTambahRekening = async () => {
     try {
-      const newRekening = { bankName, number, ownerName };
+      const newRekening = { bank_name, account_number, account_name };
       const response = await axiosInstance.post(
         "http://localhost:8000/api/accounts",
         newRekening
@@ -46,21 +46,21 @@ const TambahRekeningModal = ({ isOpen, onClose, tambahRekening }) => {
           </div>
           <input
             type="text"
-            value={bankName}
+            value={bank_name}
             onChange={(e) => setBankName(e.target.value)}
             placeholder="Nama Bank"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
-            value={number}
+            value={account_number}
             onChange={(e) => setNumber(e.target.value)}
             placeholder="Nomor Rekening"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
-            value={ownerName}
+            value={account_name}
             onChange={(e) => setOwnerName(e.target.value)}
             placeholder="Nama Pemilik"
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"

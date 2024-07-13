@@ -22,15 +22,15 @@ const RekeningBank = () => {
     fetchRekening();
   }, []);
 
-  const deleteBankAccount = async (id) => {
+  const deleteBankAccount = async (account_id) => {
     try {
-      await axiosInstance.delete(`/accounts/${id}`);
+      await axiosInstance.delete(`/accounts/${account_id}`);
       setAccounts((prevAccounts) =>
-        prevAccounts.filter((account) => account.id !== id)
+        prevAccounts.filter((account) => account.account_id !== account_id)
       );
-      console.log(`Rekening with ID ${id} deleted successfully.`);
+      console.log(`Rekening with ID ${account_id} deleted successfully.`);
     } catch (error) {
-      console.error(`Error deleting rekening with ID ${id}:`, error);
+      console.error(`Error deleting rekening with ID ${account_id}:`, error);
     }
   };
 
@@ -78,22 +78,22 @@ const RekeningBank = () => {
       </div>
       <div className="flex flex-col mt-4">
         {accounts.map((account) => (
-          <div key={account.id} className="flex justify-between items-center">
+          <div key={account.account_id} className="flex justify-between items-center">
             <div className="p-4 text-xs">
-              <p>{account.bankName}</p>
-              <p className="font-bold">{account.ownerName}</p>
-              <p className="font-bold">{account.number}</p>
+              <p>{account.bank_name}</p>
+              <p className="font-bold">{account.account_name}</p>
+              <p className="font-bold">{account.account_number}</p>
             </div>
             <button
               className="mr-8 px-6 py-2 border-2 text-xs font-semibold rounded-md ml-2 focus:outline-none"
-              onClick={() => openDeleteModal(account.id)}
+              onClick={() => openDeleteModal(account.account_id)}
             >
               Hapus
             </button>
             <DeleteRekeningModal
-              isOpen={deleteModalStates[account.id]}
-              onClose={() => closeDeleteModal(account.id)}
-              deleteBankAccount={() => deleteBankAccount(account.id)}
+              isOpen={deleteModalStates[account.account_id]}
+              onClose={() => closeDeleteModal(account.account_id)}
+              deleteBankAccount={() => deleteBankAccount(account.account_id)}
             />
           </div>
         ))}
