@@ -32,13 +32,32 @@
 .z999 {
   z-index: 999;
 }
-
 .slick-arrow {
-  background-color: #929292;
-  border-radius: 100%;
+  display: block;
+  background: #929292;
+  border-radius: 50%;
+  box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.2, 0.64, 0.21, 1) 0s;
+}
+
+.slick-arrow .slick-prev{
+  left: 30px;
 
 }
+.slick-arrow .slick-next{
+  right: 30px;
+}
+
 .slick-arrow:hover {
-  background-color: var(--color-primary);
-  border-radius: 100%;
+  display: block;
+  background: black;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  cursor: pointer;
 }

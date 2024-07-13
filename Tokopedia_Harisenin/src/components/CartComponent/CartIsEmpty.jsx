@@ -17,8 +17,9 @@ const CartIsEmpty = () => {
           Yuk, isi dengan barang-barang impianmu!
         </h3>
         <div className="">
-          <button className="px-10 my-2 py-3 ml-5 bgPrimaryColor rounded-lg text-white">
-            <p>Mulai Belanja</p>
+          <button 
+          className="px-10 my-2 py-3 ml-5 bgPrimaryColor rounded-lg text-white">
+            <a href="/"><p>Mulai Belanja</p></a>
           </button>
         </div>
       </div>

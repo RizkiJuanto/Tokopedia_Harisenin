@@ -7,11 +7,30 @@ import KategoriCard from "../components/HomeComponent/KategoriCard";
 import KategoriBottomCard from "../components/HomeComponent/KategoriBottomCard";
 import TrendingItemCard from "../components/HomeComponent/TrendingItemCard";
 import CardProduct from "../components/HomeComponent/CardProduct";
-import Slider1 from "../assets/img/slide/4.png";
-import { useNavigate } from "react-router-dom";
+import Slider1 from "../assets/img/slide/1.png";
+import Slider2 from "../assets/img/slide/2.png";
+import Slider3 from "../assets/img/slide/3.png";
+import Slider4 from "../assets/img/slide/4.png";
+import Slider5 from "../assets/img/slide/5.png";
+import Slider from "react-slick"
+// import { SampleNextArrow, SamplePrevArrow } from "../components/CustomArrows";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
-  const navigate = useNavigate();
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplayspeed:3000,
+    // nextArrow: <SampleNextArrow />,
+    // prevArrow: <SamplePrevArrow />
+  };
+
   return (
     <div className="home m-0 p-0 h-full min-w-min">
       <Header />
@@ -19,11 +38,44 @@ const Home = () => {
         <div className="mainContent flex w-1208px my-0 mx-auto flex-1">
           <div className="containerSlider py-6 px-0 relative w-full h-auto min-h-60">
             <div className="sliderContent w-1208px h-80">
-              <img
-                className="w-1208px h-80 border-none rounded-xl"
-                src={Slider1}
-                alt=""
-              />
+              <Slider {...settings}>
+                <div className="">
+                  <img
+                    className="w-1208px h-80 border-none rounded-xl"
+                    src={Slider1}
+                    alt=""
+                  />
+                </div>
+                <div className="">
+                  <img
+                    className="w-1208px h-80 border-none rounded-xl"
+                    src={Slider2}
+                    alt=""
+                  />
+                </div>
+                <div className="">
+                  <img
+                    className="w-1208px h-80 border-none rounded-xl"
+                    src={Slider3}
+                    alt=""
+                  />
+                </div>
+                <div className="">
+                  <img
+                    className="w-1208px h-80 border-none rounded-xl"
+                    src={Slider4}
+                    alt=""
+                  />
+                </div>
+                <div className="">
+                  <img
+                    className="w-1208px h-80 border-none rounded-xl"
+                    src={Slider5}
+                    alt=""
+                  />
+                </div>
+
+              </Slider>
             </div>
           </div>
         </div>

@@ -1,18 +1,32 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { BsFillTicketFill } from "react-icons/bs";
 import CartIsEmpty from '../components/CartComponent/CartIsEmpty'
 import CartItem from '../components/CartComponent/CartItem'
+import axiosInstance from "../axiosInstance";
 
 
 const Cart = () => {
-
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
   const handleTotalChange =(quantity,price) => {
     setTotalPrice(quantity*price);
   }
+  
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const response = await axiosInstance.get("http://localhost:8000/api/cart"); // Adjust URL based on your backend API endpoint
+        setCartItems(response.data); // Assuming response.data is an array of cart items
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+        // Handle error state or alert user
+      }
+    };
+    fetchCartItems();
+  }, []);
 
 
   return (
@@ -21,8 +35,15 @@ const Cart = () => {
       <div className="mx-auto pt-40 flex justify-center gap-6 min-w-max max-w-max">
         <div className="w-full">
           <div className="font-bold text-2xl my-5 ">Keranjang</div>
-          {/* <CartIsEmpty /> */}
-          <CartItem onTotalChange={handleTotalChange} />
+          {cartItems.length === 0 ? (
+            <CartIsEmpty />
+          ) : (
+            
+            <CartItem
+            cartItems={cartItems}
+            onTotalChange={handleTotalChange}
+            />
+          )}
         </div>
 
         <div className="bg-[white] rounded-xl mt-16 w-96">

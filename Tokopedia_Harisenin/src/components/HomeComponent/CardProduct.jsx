@@ -11,7 +11,6 @@ const CardProduct = () => {
     const fetchProduct = async () => {
       try{
         const response = await axiosInstance.get("http://localhost:8000/api/products");
-        console.log(response.data);
         setProducts(response.data);
       }catch(e){
         console.error("Error ga ke fetchhhh", e);
@@ -45,7 +44,7 @@ const CardProduct = () => {
       <Link key={product.product_id} to={`/ProductDetail/${product.product_id}`}>
         <div key={product.product_id} className="min-w-fit max-w-fit mb-6 rounded-xl shadow  shadow-[#0000001f] border-solid border-2 border-[#e5e7e9] ">
           <div className="">
-            {/* <img className="rounded-t-xl w-48 h-48" src={constructImageUrl(product.product_details[0].product_image)} alt="" /> */}
+            <img className="rounded-t-xl w-48 h-48" src={constructImageUrl(product.product_details[0].product_image)} alt="" />
           </div>
           <div className=" mt-1 mr-1 mb-4 ml-3 ">
             <div className="max-w-44 mb-1">

@@ -20,7 +20,7 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { LuPen } from "react-icons/lu";
 import { GoDotFill } from "react-icons/go";
 import axiosInstance from "../axiosInstance";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -32,7 +32,8 @@ const ProductDetail = () => {
   const [mainImage, setMainImage] = useState(null);
   const [mainImageUrl, setMainImageUrl] = useState(null);
   const [addNote, setAddNote] = useState(false);
-
+  const [totalPrice, setTotalPrice] = useState(0);
+  
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
@@ -52,6 +53,31 @@ const ProductDetail = () => {
     window.scrollTo(0, 0);
 
   },[id]);
+
+  const handleAddToCart = () => {
+    const { product_id, store_id,} = product;
+    const cart_total = totalPrice; // Calculate total cart amount
+    addToCart(product_id, store_id, quantity, cart_total);
+};
+
+
+  const addToCart = async (productId, storeId, quantity, total) => {
+    try {
+      // const total = product.product_price * quantity;
+      const response = await axiosInstance.post('http://localhost:8000/api/cart/add', {
+        product_id: productId,
+        store_id: storeId,
+        cart_quantity: quantity,
+        cart_total: total,
+      });
+      // const data = await response.json();
+      console.log("Cart item added successfully:", response.data);
+      alert("Item added to cart successfully!");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+      alert("Failed to add item to cart.");
+    }
+  }
 
   const tabs = [
     { id: 1, title: "Detail", content: <Detail /> },
@@ -93,11 +119,12 @@ const ProductDetail = () => {
 
 
   const handleQuantityChange = (e) => {
-    const value = e.target.value;
-    if(value === ''|| (Number(value)>0 && Number.isInteger(Number(value)))) {
-      setQuantity(Number(value));
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value > 0) {
+      setQuantity(value);
     }
-  }
+  };
+
   const formatRupiah = (number) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -114,7 +141,6 @@ const ProductDetail = () => {
     return name;
   };
 
-  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     if (product) {
@@ -274,7 +300,9 @@ const ProductDetail = () => {
                 <div className="text-sm content-center">Subtotal</div>
                 <div className="text-base font-bold">{formatRupiah(totalPrice)}</div>
               </div>
-              <a href="/Cart"  className="flex my-3 w-full justify-center items-center bgPrimaryColor h-10 rounded-md text-white text-base font-bold">+ Keranjang</a>
+              <button 
+              onClick={handleAddToCart}
+              className="flex my-3 w-full justify-center items-center bgPrimaryColor h-10 rounded-md text-white text-base font-bold">+ Keranjang</button>
               <div className="flex my-3 w-full justify-center items-center bg-white h-10 border border-green-600 rounded-md text-green-600 text-base font-bold">Beli</div>
               <div className="my-2 flex justify-around">
                 <button className="w-full mx-2">
