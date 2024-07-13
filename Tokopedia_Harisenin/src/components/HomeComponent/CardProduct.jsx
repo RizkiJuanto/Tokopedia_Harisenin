@@ -11,7 +11,6 @@ const CardProduct = () => {
     const fetchProduct = async () => {
       try{
         const response = await axiosInstance.get("http://localhost:8000/api/products");
-        console.log(response.data);
         setProducts(response.data);
       }catch(e){
         console.error("Error ga ke fetchhhh", e);

@@ -7,6 +7,7 @@ const addressRoutes = require("./routes/addressRoutes");
 const productRoutes = require("./routes/productRoutes");
 const bankAccountRoutes = require("./routes/bankAccountRoutes");
 const customerRoutes = require("./routes/customerRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 const app = express();
 
 // Middleware
@@ -27,6 +28,7 @@ app.use("/api/addresses", addressRoutes);
 app.use("/api/accounts", bankAccountRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/customers", customerRoutes);
+app.use("/api/cart", cartRoutes);
 
 
 db.sync()

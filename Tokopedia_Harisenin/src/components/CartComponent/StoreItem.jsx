@@ -4,7 +4,7 @@ import { FaRegHeart,FaHeart } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
 import GambarMouse from "../../assets/img/Mouse.jpg";
 
-const StoreItem = ({onTotalChange}) => {
+const StoreItem = ({isCheck, onTotalChange, onCheckBox, item}) => {
     const [quantity, setQuantity] = useState(1);
     const [isLiked,setIsLiked] = useState(false);
     const [isDropDownOpen,setDropDownOpen] = useState(false);
@@ -41,36 +41,49 @@ const StoreItem = ({onTotalChange}) => {
       };
     
       const handleQuantityChange = (e) => {
-        const value = e.target.value;
-        if(value === ''|| (Number(value)>0 && Number.isInteger(Number(value)))) {
-          setQuantity(Number(value));
-        }
+        setQuantity(item.cart_quantity)
       }
+
+      const formatRupiah = (number) => {
+        return new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0
+        }).format(number);
+      };
+
+      const constructImageUrl = (path) => {
+        return `http://localhost:8000${path}`;
+      };
+
   return (
-    <div className="flex gap-5 my-3 py-3 px-5">
-          <div className="flex gap-5">
+    
+    <div key={item.id}  className="flex gap-5 my-3 py-3 px-5">
+      <div className="flex gap-5">
+        <div className="">
+          <input 
+          type="checkbox"
+          checked={isCheck}
+          onChange={(e) => onCheckBox(e.target.checked)}
+          />
+        </div>
+        <div className="">
+          <img className="w-32 h-auto" src={constructImageUrl(item?.product?.product_details[1].product_image)} alt="" />
+        </div>
+      </div>
+      <div className="block w-full">
+        <div className="flex items-center justify-between ">
+          <div className="block">
             <div className="">
-              <input type="checkbox" />
-            </div>
-            <div className="">
-              <img className="w-32 h-auto" src={GambarMouse} alt="" />
+              {item.product.product_name}
             </div>
           </div>
-          <div className="block w-full">
-            <div className="flex items-center justify-between ">
-              <div className="block">
-                <div className="">
-                  AJAZZ AJ199 GAMING MOUSE DUAL MODE WIRELESS LIGHT{" "}
-                </div>
-                <div className="">Hitam</div>
-              </div>
-              <div className="flex font-bold">
-                <div className="">Rp</div>
-                <div className="">599.000</div>
-              </div>
-            </div>
-            <div className="flex justify-end gap-3 my-2 bottom-0">
-              <div className="">
+          <div className="flex font-bold">
+            <div className="">{formatRupiah(item.cart_total)}</div>
+          </div>
+        </div>
+        <div className="flex justify-end gap-3 my-2 bottom-0">
+          <div className="">
                 <MdEditNote onClick={toggleDropDown} className="border-2 border-gray-500 text-gray-500 rounded text-2xl" />
                 {isDropDownOpen &&(
                   <div className="absolute right-96 mt-2 mr-16 w-96 bg-white border border-gray-300 rounded shadow-lg">
@@ -97,36 +110,38 @@ const StoreItem = ({onTotalChange}) => {
                   </div>
                 </div>
                 )}
-              </div>
-              <div className="">
-                {isLiked ? (
-                  <FaHeart onClick={toggleLike} className="text-red-600 text-2xl"/>) 
-                  : <FaRegHeart onClick={toggleLike} className="text-gray-500 text-2xl"/>}
-              </div>
-              <div className="">
-                <MdOutlineDelete className="text-gray-500 text-2xl" />
-              </div>
-              <div className="flex border-solid border-[black] border px-2 rounded justify-end">
-                <div className="">
-                  <button
-                  onClick={decreaseQuantity}>-</button>
-                </div>
-                <div className="w-7 mx-1">
-                  <input 
-                  type="text" 
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                  className="mx-3 content-center text-center w-3 border-none focus:outline-none" />
-                </div>
-                <div className="">
-                  <button 
-                  onClick={increaseQuantity}>+</button>
-                </div>
-              </div>
+          </div>
+          <div className="">
+            {isLiked ? (
+              <FaHeart onClick={toggleLike} className="text-red-600 text-2xl"/>) 
+              : <FaRegHeart onClick={toggleLike} className="text-gray-500 text-2xl"/>}
+          </div>
+          <div className="">
+            <MdOutlineDelete className="text-gray-500 text-2xl" />
+          </div>
+          <div className="flex border-solid border-[black] border px-2 rounded justify-end">
+            <div className="">
+              <button
+              onClick={decreaseQuantity}>-</button>
+            </div>
+            <div className="w-7 mx-1">
+              <input 
+              type="text" 
+              value={quantity}
+              onChange={handleQuantityChange}
+              className="mx-3 content-center text-center w-3 border-none focus:outline-none" />
+            </div>
+            <div className="">
+              <button 
+                onClick={increaseQuantity}>
+                +
+              </button>
             </div>
           </div>
         </div>
+      </div>
+    </div>
   )
 }
 
-export default StoreItem
+export default StoreItem;

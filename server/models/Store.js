@@ -19,6 +19,8 @@ const Store = db.define("store",{
         type:Sequelize.TEXT,
         allowNull:false,
     }
+},{
+    timestamps: false
 });
 
 module.exports = Store;

@@ -111,7 +111,7 @@ const Header = () => {
             )}
           </div>
           <div className="border-r-2 border-solid justify-around flex flex-wrap w-48 mr-3 pr-2">
-            <CiShoppingCart className="text-2xl text-gray-900" />
+            <a href="/Cart"><CiShoppingCart className="text-2xl text-gray-900" /></a>
             <IoMdNotificationsOutline className="text-2xl text-gray-500" />
             <IoMailOutline className="text-2xl text-gray-500" />
           </div>
