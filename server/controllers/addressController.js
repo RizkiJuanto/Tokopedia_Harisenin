@@ -3,8 +3,8 @@ const Address = require("../models/Address");
 //Get alamat list
 exports.getAllAddresses = async (req, res) => {
   try {
-    const alamats = await Address.findAll();
-    res.status(200).json(alamats);
+    const addresses = await Address.findAll();
+    res.status(200).json(addresses);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch addresses" });
@@ -14,8 +14,14 @@ exports.getAllAddresses = async (req, res) => {
 // POST new alamat
 exports.createAddress = async (req, res) => {
   try {
-    const { title, name, phone, address } = req.body;
-    const newAlamat = await Address.create({ title, name, phone, address });
+    const { address_label, address_name, address_phone, address_full } =
+      req.body;
+    const newAlamat = await Address.create({
+      address_label,
+      address_name,
+      address_phone,
+      address_full,
+    });
     res.status(201).json(newAlamat);
   } catch (error) {
     console.error(error);
@@ -27,21 +33,21 @@ exports.createAddress = async (req, res) => {
 exports.updateAddress = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, name, phone, address } = req.body;
+    const { address_label, address_name, address_phone, address_full } =
+      req.body;
 
-    const alamat = await Address.findByPk(id);
-    if (!alamat) {
+    const address = await Address.findByPk(id);
+    if (!address) {
       return res.status(404).json({ error: "Alamat not found" });
     }
+    address.address_label = address_label;
+    address.address_name = address_name;
+    address.address_phone = address_phone;
+    address.address_full = address_full;
 
-    alamat.title = title;
-    alamat.name = name;
-    alamat.phone = phone;
-    alamat.address = address;
+    await address.save();
 
-    await alamat.save();
-
-    res.status(200).json(alamat);
+    res.status(200).json(address);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to update alamat" });
@@ -73,20 +79,20 @@ exports.deleteAddress = async (req, res) => {
 // Add alamat
 exports.addAddress = (req, res) => {
   const data = {
-    title: "alamat saya",
-    name: "saya",
-    phone: "123",
-    address: "jalan mangga",
+    address_label: "alamat saya",
+    address_name: "saya",
+    address_phone: "123",
+    address_full: "jalan mangga",
   };
 
-  let { title, name, phone, address } = data;
+  let { address_label, address_name, address_phone, address_full } = data;
 
   // masukin ke table
   Address.create({
-    title,
-    name,
-    phone,
-    address,
+    address_label,
+    address_name,
+    address_phone,
+    address_full,
   })
     .then((alamat) => res.redirect("/api/addresses"))
     .catch((err) => console.log(err));

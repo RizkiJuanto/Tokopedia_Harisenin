@@ -5,10 +5,10 @@ import axiosInstance from "../../axiosInstance";
 
 const UbahAlamatModal = ({ isOpen, onClose, address, onAddressUpdated }) => {
   const [formData, setFormData] = useState({
-    title: "",
-    name: "",
-    phone: "",
-    address: "",
+    address_label: "",
+    address_name: "",
+    address_phone: "",
+    address_full: "",
   });
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const UbahAlamatModal = ({ isOpen, onClose, address, onAddressUpdated }) => {
 
   const handleSave = async () => {
     try {
-      const response = await axiosInstance.put(`http://localhost:8000/api/addresses/${address.id}`, formData);
+      const response = await axiosInstance.put(`http://localhost:8000/api/addresses/${address.address_id}`, formData);
       onAddressUpdated(response.data);
       onClose();
     } catch (error) {
@@ -55,31 +55,32 @@ const UbahAlamatModal = ({ isOpen, onClose, address, onAddressUpdated }) => {
           </div>
           <input
             type="text"
-            name="title"
+            name="address_label"
             placeholder="Label Alamat"
-            value={formData.title}
+            value={formData.address_label}
             onChange={handleChange}
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
-            name="name"
+            name="address_name"
             placeholder="Nama"
-            value={formData.name}
+            value={formData.address_name}
             onChange={handleChange}
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <input
             type="text"
-            name="phone"
+            name="address_phone"
             placeholder="Nomor HP"
-            value={formData.phone}
+            value={formData.address_phone}
             onChange={handleChange}
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />
           <textarea
             placeholder="Alamat Lengkap"
-            value={formData.address}
+            name="address_full"
+            value={formData.address_full}
             onChange={handleChange}
             className="w-full px-3 py-2 text-sm border rounded-md outline-none ring-1 ring-gray-300 focus:ring-1 focus:ring-green-400 mb-4"
           />

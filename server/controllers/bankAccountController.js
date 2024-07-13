@@ -1,4 +1,4 @@
-const BankAccount = require("../models/BankAccount");
+const BankAccount = require("../models/Bank_account");
 
 exports.getAllBankAccounts = async (req, res) => {
   try {
@@ -12,8 +12,12 @@ exports.getAllBankAccounts = async (req, res) => {
 
 exports.createBankAccount = async (req, res) => {
   try {
-    const { bankName, number, ownerName } = req.body;
-    const newRekening = await BankAccount.create({ bankName, number, ownerName });
+    const { account_number, account_name, bank_name } = req.body;
+    const newRekening = await BankAccount.create({
+      account_number,
+      account_name,
+      bank_name,
+    });
     res.status(201).json(newRekening);
   } catch (error) {
     console.error(error);
@@ -46,17 +50,17 @@ exports.deleteBankAccount = async (req, res) => {
 //tes add aja
 exports.addBankAccount = (req, res) => {
   const data = {
-    bankName: "rekening saya",
-    number: "21312412",
-    ownerName: "SAYA DONK",
+    account_number: "rekening saya",
+    account_name: "21312412",
+    bank_name: "SAYA DONK",
   };
 
-  let { bankName, number, ownerName } = data;
+  let { account_number, account_name, bank_name } = data;
 
   BankAccount.create({
-    bankName,
-    number,
-    ownerName,
+    account_number,
+    account_name,
+    bank_name,
   })
     .then((rekening) => res.redirect("/api/accounts"))
     .catch((err) => console.log(err));
